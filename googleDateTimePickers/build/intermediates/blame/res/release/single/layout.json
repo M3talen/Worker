@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\date_picker_dialog.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\date_picker_dialog.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\activity_main.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\time_header_label.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\time_header_label.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\date_picker_view_animator.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\date_picker_view_animator.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\date_picker_selected_date.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\date_picker_selected_date.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\time_picker_dialog.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\time_picker_dialog.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\date_picker_header_view.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\date_picker_header_view.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\date_picker_done_button.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\date_picker_done_button.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout\\year_label_text_view.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout\\year_label_text_view.xml"
+    }
+]

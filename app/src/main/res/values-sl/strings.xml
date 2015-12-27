@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Worker</string>
+    <string name="account_no1">Uporabnik 1</string>
+    <string name="account_no2">Uporabnik 2</string>
+    <string name="button_no">Ne</string>
+    <string name="button_yes">Ja</string>
+    <string name="database_bk_found"><![CDATA[Varnosna kopija : <b>Obstaja</b>]]></string>
+    <string name="database_bk_notfound"><![CDATA[Varnosna kopija : <b>Ne obstaja</b>]]></string>
+    <string name="filter_asc">Navzgor</string>
+    <string name="filter_auto">Samodejno urejanje</string>
+    <string name="filter_des">Navzdol</string>
+    <string name="filter_disable">Onemogoči urejanje</string>
+    <string name="filter_month">Urejaj mesečno</string>
+    <string name="filter_sorting">Razvrščanje</string>
+    <string name="filter_year">Urejaj letno</string>
+    <string name="gp_piis">Ni informacij o uporabniku</string>
+    <string name="gp_revoke">Uporabnik je preklican</string>
+    <string name="gp_singout">Odjavi se</string>
+    <string name="holidays_title">Dopust</string>
+    <string name="home">Domov</string>
+    <string name="interventions_title">Intervencije</string>
+    <string name="login_gp">Prijava s Google+</string>
+    <string name="button_ok">Ok</string>
+</resources>

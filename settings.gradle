@@ -1,0 +1,2 @@
+include ':app', ':googleDateTimePicker'
+project(':googleDateTimePicker').projectDir = new File('googleDateTimePickers')

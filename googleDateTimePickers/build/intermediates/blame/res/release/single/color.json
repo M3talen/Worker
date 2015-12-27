@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\color\\date_picker_selector.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\color\\date_picker_selector.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\color\\done_text_color.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\color\\done_text_color.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\color\\date_picker_year_selector.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\color\\date_picker_year_selector.xml"
+    }
+]

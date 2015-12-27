@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/home_scroller"
+        android:animateLayoutChanges="true"
+        android:fillViewport="true"
+        android:measureAllChildren="true">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:animateLayoutChanges="true">
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/primaryContentCardView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:stateListAnimator="@anim/raise"
+                materialdesign:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:animateLayoutChanges="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/home_textView_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/home_textView_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/primaryContentCardView3"
+                android:layout_width="fill_parent"
+                android:layout_height="240dp"
+                android:layout_below="@+id/primaryContentCardView1"
+                android:animateLayoutChanges="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:stateListAnimator="@anim/raise"
+                materialdesign:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:animateLayoutChanges="true"
+                    android:orientation="horizontal">
+
+                        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                          android:id="@+id/calendar_view"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_weight="1"
+                          android:animateLayoutChanges="true"
+                          android:background="@color/custom_background"
+                          android:nestedScrollingEnabled="true"
+                          android:paddingLeft="16dp"
+                          android:paddingRight="16dp"
+                          android:scrollbars="none"
+                          android:textFilterEnabled="true"
+                          app:mcv_weekDayTextAppearance="@style/TextAppearance.MaterialCalendarWidget.WeekDay"
+                          app:mcv_selectionColor="@drawable/custom_calendar_bg_selector"
+                            app:mcv_weekDayLabels="@array/custom_weekdays"
+                          app:mcv_showOtherDates="all" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/home_et_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_weight="1"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="Norm"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/home_et_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_weight="1"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="Holidays"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/home_et_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_weight="1"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="Work hours"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/home_et_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_weight="1"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="Overtime hours"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/primaryContentCardView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/primaryContentCardView3"
+                android:animateLayoutChanges="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:stateListAnimator="@anim/raise"
+                materialdesign:cardUseCompatPadding="true">
+
+                <org.eazegraph.lib.charts.ValueLineChart
+                    android:id="@+id/home_chart_norm"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:animateLayoutChanges="true"
+                    app:egCurveSmoothness="0.4"
+                    app:egEmptyDataText="No data"
+                    app:egUseCubic="true"
+                    app:egUseDynamicScaling="true"
+                    app:egUseOverlapFill="false" />
+
+            </android.support.v7.widget.CardView>
+
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

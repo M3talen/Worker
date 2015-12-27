@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout-land\\date_picker_dialog.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout-land\\date_picker_dialog.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\release\\layout-land\\time_picker_dialog.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\src\\main\\res\\layout-land\\time_picker_dialog.xml"
+    }
+]

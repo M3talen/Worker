@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialogSettingsEdit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:visibility="invisible">
+
+    <ImageView
+        android:id="@+id/dialog_settings_edit_header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg"
+        android:elevation="2dp" />
+
+    <ImageView
+        android:id="@+id/dialog_settings_edit_iv_icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/ic_launcher"
+        android:elevation="4dp" />
+
+    <LinearLayout
+        android:id="@+id/dialog_settings_edit_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_settings_edit_header"
+        android:background="@color/grey_white_1000"
+        android:elevation="2dp"
+        android:orientation="vertical">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/dialog_settings_edit_et_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:hint="Name"
+                android:gravity="center" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/dialog_settings_edit_et_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:hint="Job"
+                android:gravity="center" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/dialog_settings_edit_FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dialog_settings_edit_body"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="-28dp"
+        android:layout_marginRight="16dp"
+        android:elevation="2dp"
+        android:src="@drawable/ic_action_add"
+        android:stateListAnimator="@anim/raise"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:rippleColor="@color/primary_light" />
+
+
+</RelativeLayout>
