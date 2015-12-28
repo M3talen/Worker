@@ -17,6 +17,7 @@
 
     <LinearLayout
         android:id="@+id/body"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/header"
@@ -27,34 +28,139 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="40dp" />
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/dialogNormView_et_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="Date"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_margin="10dp" />
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/dialogNormView_et_norm"
-                android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center">
+
+            <CheckBox
+                android:id="@+id/checkBoxAutoFilter"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:hint="Data"
-                android:inputType="numberDecimal"
-                android:numeric="integer|decimal"
-                android:layout_margin="10dp" />
-        </android.support.design.widget.TextInputLayout>
+                android:text="Automatic filtering"
+                android:layout_margin="8dp"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disable filter"
+                android:id="@+id/checkBoxDisableFilter"
+                android:layout_margin="8dp"
+                android:layout_gravity="right"
+                android:checked="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Sorting"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="right">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonAsc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ascending"
+                        android:checked="false" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Descending"
+                        android:checked="false" />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp">
+
+                <CheckBox
+                    android:id="@+id/checkBoxYearFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Year filter"
+                    android:checked="false" />
+
+                <Button
+                    android:id="@+id/buttonYear"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="Year" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp">
+
+                <CheckBox
+                    android:id="@+id/checkBoxMonthFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Month filter"
+                    android:checked="false" />
+
+                <Button
+                    android:id="@+id/buttonMonth"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Month"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -69,7 +175,7 @@
         app:fabSize="normal"
         app:borderWidth="0dp"
         app:rippleColor="@color/primary_light"
-        android:src="@drawable/ic_check_grey600_24dp"
+        android:src="@drawable/ic_check_black_24dp"
         android:stateListAnimator="@anim/raise" />
 
 </RelativeLayout>

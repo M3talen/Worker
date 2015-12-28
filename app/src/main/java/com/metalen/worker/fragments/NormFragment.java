@@ -445,6 +445,39 @@ public class NormFragment extends FragmentCore {
     }
 
     public void openFilter() {
+        final View dialogView = View.inflate(getActivity(), R.layout.dialog_filter, null);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = builder.create();
+//
+        final ImageView iCover = (ImageView) dialogView.findViewById(R.id.header);
+        iCover.setImageDrawable(ACC_Cover);
+
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogs) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    dialogView.post(new Runnable() {
+                        public void run() {
+                            dialogView.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    revealShow(dialogView, true, dialog, R.id.dialogFilter, R.id.FABDialogFilter);
+                                }
+                            }, 200);
+
+                        }
+                    });
+                else
+                    dialog.findViewById(R.id.dialogNormView).setVisibility(View.VISIBLE);
+
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        dialog.show();
     }
 }
