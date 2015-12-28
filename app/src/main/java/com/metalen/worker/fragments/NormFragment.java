@@ -21,7 +21,6 @@ import android.view.*;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
-import com.flipboard.bottomsheet.BottomSheet;
 import com.metalen.worker.MainActivity;
 import com.metalen.worker.R;
 import com.metalen.worker.SQL.SQLHandler;
@@ -51,8 +50,6 @@ public class NormFragment extends FragmentCore {
     private View fragmentView;
     private String DataType = DataRecord.Type.NORMA.toString();
 
-    private BottomSheet filterLayout;
-
     private int ACC = 1;
     private String ACC_USER = "";
 
@@ -70,7 +67,6 @@ public class NormFragment extends FragmentCore {
         mFAB = (FloatingActionButton) fragmentView.findViewById(R.id.FABNorma);
         mRecyclerView = (RecyclerView) fragmentView.findViewById(R.id.recyclerView);
         mDB = new SQLHandler(getActivity());
-        //mDemoDataSet.add(new Norms(0," NULL ", " NULL ", "NULL"));
 //
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -78,6 +74,7 @@ public class NormFragment extends FragmentCore {
         mDataSet.clear();
         mAdapter = new RecyclerViewAdapterNorm(mDataSet, NormFragment.this);
        // mRecyclerView.setItemAnimator(new ItemAnimator(mRecyclerView));
+
         mRecyclerView.setAdapter(mAdapter);
 //
 
@@ -105,7 +102,6 @@ public class NormFragment extends FragmentCore {
             ACC_Cover = ((MainActivity) getActivity()).getUser(1).getBackground();
         }
 
-        filterLayout = (BottomSheet) fragmentView.findViewById(R.id.norma_layout);
         return fragmentView;
     }
 
@@ -449,8 +445,6 @@ public class NormFragment extends FragmentCore {
     }
 
     public void openFilter() {
-        if (!filterLayout.isSheetShowing())
-            filterLayout.showWithSheetView(LayoutInflater.from(getActivity()).inflate(R.layout.filter, filterLayout, false));
 
     }
 }

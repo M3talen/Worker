@@ -56,7 +56,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         sSettings = this.newSection("Settings", this.getResources().getDrawable(R.drawable.ic_settings_black_24dp), new FragmentSettings());
 
         this.addSection(sHome);
-        this.addSection(sCalendar);
+       // this.addSection(sCalendar);
         this.addDivisor();
         this.addSection(sNorm);
         this.addSection(sHolidays);
