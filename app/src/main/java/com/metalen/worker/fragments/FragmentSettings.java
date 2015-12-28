@@ -331,18 +331,6 @@ public class FragmentSettings extends FragmentCore {
         }
     }
 
-    protected void setGooglePlusButtonText(SignInButton signInButton, String buttonText) {
-        for (int i = 0; i < signInButton.getChildCount(); i++) {
-            View v = signInButton.getChildAt(i);
-
-            if (v instanceof TextView) {
-                TextView tv = (TextView) v;
-                tv.setText(buttonText);
-                return;
-            }
-        }
-    }
-
     protected void editDialog(final MaterialAccount accountx, final ImageView imx) {
         final View dialogView = View.inflate(getActivity(), R.layout.dialog_settings_useredit, null);
 

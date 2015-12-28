@@ -12,12 +12,22 @@ import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 
 /**
  * Created by Metalen on 24.1.2015..
  */
 public class FragmentCore extends Fragment {
 
+    //FILTER
+    protected boolean _AutoFilter;
+    protected String _SortingType;
+    protected boolean _YearFilterEnabled;
+    protected boolean _MonthFilterEnabled;
+    protected int _YearFilterValue;
+    protected int _MonthFilterValue;
+    protected boolean _DisableFilter;
 
     protected static String pad(int c) {
         if (c >= 10)
@@ -153,4 +163,51 @@ public class FragmentCore extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    protected void setEnabledLayoutsAuto(CheckBox mAutoFilter, CheckBox mDisableFilter, RelativeLayout mLayout1, RelativeLayout mLayout2, RelativeLayout mLayout3) {
+
+        if (_DisableFilter && _AutoFilter)
+        {
+            _AutoFilter = true;
+            _DisableFilter = false;
+            mAutoFilter.setChecked(true);
+            mDisableFilter.setChecked(false);
+        }
+
+        if (_AutoFilter == true) {
+            mLayout1.setVisibility(View.GONE);
+            mLayout2.setVisibility(View.GONE);
+            mLayout3.setVisibility(View.GONE);
+            mDisableFilter.setEnabled(false);
+            mAutoFilter.setEnabled(true);
+        } else {
+            mLayout1.setVisibility(View.VISIBLE);
+            mLayout2.setVisibility(View.VISIBLE);
+            mLayout3.setVisibility(View.VISIBLE);
+            mAutoFilter.setEnabled(true);
+            mDisableFilter.setEnabled(true);
+        }
+    }
+    protected void setEnabledLayoutsDisabler(CheckBox mAutoFilter, CheckBox mDisableFilter, RelativeLayout mLayout1, RelativeLayout mLayout2, RelativeLayout mLayout3) {
+
+        if (_DisableFilter && _AutoFilter)
+        {
+            _AutoFilter = true;
+            _DisableFilter = false;
+            mAutoFilter.setChecked(true);
+            mDisableFilter.setChecked(false);
+        }
+        if (_DisableFilter == true) {
+            mLayout1.setVisibility(View.GONE);
+            mLayout2.setVisibility(View.GONE);
+            mLayout3.setVisibility(View.GONE);
+            mDisableFilter.setEnabled(true);
+            mAutoFilter.setEnabled(false);
+        } else {
+            mLayout1.setVisibility(View.VISIBLE);
+            mLayout2.setVisibility(View.VISIBLE);
+            mLayout3.setVisibility(View.VISIBLE);
+            mAutoFilter.setEnabled(true);
+            mDisableFilter.setEnabled(true);
+        }
+    }
 }

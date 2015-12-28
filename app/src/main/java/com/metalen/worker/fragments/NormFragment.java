@@ -19,8 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.*;
 import android.view.animation.AnticipateOvershootInterpolator;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.*;
 import com.metalen.worker.MainActivity;
 import com.metalen.worker.R;
 import com.metalen.worker.SQL.SQLHandler;
@@ -55,6 +54,7 @@ public class NormFragment extends FragmentCore {
 
     private Drawable ACC_Cover;
 
+
     public NormFragment() {
     }
 
@@ -73,7 +73,7 @@ public class NormFragment extends FragmentCore {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mDataSet.clear();
         mAdapter = new RecyclerViewAdapterNorm(mDataSet, NormFragment.this);
-       // mRecyclerView.setItemAnimator(new ItemAnimator(mRecyclerView));
+        // mRecyclerView.setItemAnimator(new ItemAnimator(mRecyclerView));
 
         mRecyclerView.setAdapter(mAdapter);
 //
@@ -335,7 +335,7 @@ public class NormFragment extends FragmentCore {
                                 dialogView.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        final ArcAnimator animatorArc = ArcAnimator.createArcAnimator(mFAB, orgX+getPixels(28), orgY+getPixels(28), 0, Side.LEFT);
+                                        final ArcAnimator animatorArc = ArcAnimator.createArcAnimator(mFAB, orgX + getPixels(28), orgY + getPixels(28), 0, Side.LEFT);
                                         animatorArc.setDuration(300);
                                         animatorArc.start();
                                     }
@@ -380,7 +380,7 @@ public class NormFragment extends FragmentCore {
                                 dialogView.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        final ArcAnimator animatorArc = ArcAnimator.createArcAnimator(mFAB, orgX+getPixels(28), orgY+getPixels(28), 0, Side.LEFT);
+                                        final ArcAnimator animatorArc = ArcAnimator.createArcAnimator(mFAB, orgX + getPixels(28), orgY + getPixels(28), 0, Side.LEFT);
                                         animatorArc.setDuration(300);
                                         animatorArc.start();
                                     }
@@ -455,6 +455,92 @@ public class NormFragment extends FragmentCore {
         final ImageView iCover = (ImageView) dialogView.findViewById(R.id.header);
         iCover.setImageDrawable(ACC_Cover);
 
+        //GET SETTINGS
+        final SharedPreferences prefs = getActivity().getSharedPreferences("Worker", Context.MODE_PRIVATE);
+        _AutoFilter = prefs.getBoolean("FILTER_" + DataType + "_AutoFilter", true);
+        _SortingType = prefs.getString("FILTER_" + DataType + "_SortingType", "DESC");
+        _YearFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_YearFilterEnabled", false);
+        _MonthFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_MonthFilterEnabled", false);
+        _YearFilterValue = prefs.getInt("FILTER_" + DataType + "_YearFilterValue", 0);
+        _MonthFilterValue = prefs.getInt("FILTER_" + DataType + "_MonthFilterValue", 0);
+        _DisableFilter = prefs.getBoolean("FILTER_" + DataType + "_DisableFilter", false);
+        //getViews
+        final CheckBox mAutoFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxAutoFilter);
+        final CheckBox mYearFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxYearFilter);
+        final CheckBox mMonthFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxMonthFilter);
+        final CheckBox mDisableFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxDisableFilter);
+        RadioButton mSortingTypeASC = (RadioButton) dialogView.findViewById(R.id.radioButtonAsc);
+        RadioButton mSortingTypeDESC = (RadioButton) dialogView.findViewById(R.id.radioButtonDesc);
+        final Button mYearFilterValue = (Button) dialogView.findViewById(R.id.buttonYear);
+        final Button mMonthFilterValue = (Button) dialogView.findViewById(R.id.buttonMonth);
+        final RelativeLayout mLayout1 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout1);
+        final RelativeLayout mLayout2 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout2);
+        final RelativeLayout mLayout3 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout3);
+        //
+        if(_DisableFilter)
+            setEnabledLayoutsDisabler(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+        if(_AutoFilter)
+            setEnabledLayoutsAuto(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+        //
+        mAutoFilter.setChecked(_AutoFilter);
+        mDisableFilter.setChecked(_DisableFilter);
+        mYearFilter.setChecked(_YearFilterEnabled);
+        mMonthFilter.setChecked(_MonthFilterEnabled);
+        if (_SortingType.equals("DESC")) {
+            mSortingTypeDESC.setChecked(true);
+            mSortingTypeASC.setChecked(false);
+        }else
+        {
+            mSortingTypeDESC.setChecked(false);
+            mSortingTypeASC.setChecked(true);
+        }
+        mYearFilterValue.setText(_YearFilterValue + "");
+        mMonthFilterValue.setText(_MonthFilterValue + "");
+        //
+        mAutoFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _AutoFilter = !_AutoFilter;
+                setEnabledLayoutsAuto(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+            }
+        });
+        mDisableFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _DisableFilter = !_DisableFilter;
+                setEnabledLayoutsDisabler(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+            }
+        });
+        mSortingTypeDESC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _SortingType = "ASC";
+            }
+        });
+        mSortingTypeASC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _SortingType = "DESC";
+            }
+        });
+        mYearFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _YearFilterEnabled = !_YearFilterEnabled;
+            }
+        });
+        mMonthFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _MonthFilterEnabled = !_MonthFilterEnabled;
+            }
+        });
+        mYearFilterValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
@@ -476,8 +562,65 @@ public class NormFragment extends FragmentCore {
 
             }
         });
+        dialogView.findViewById(R.id.FABDialogFilter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    dialogView.post(new Runnable() {
+                        public void run() {
+                            revealShow(dialogView, false, dialog, R.id.dialogFilter, R.id.FABDialogFilter, true);
+                        }
+                    });
+                else {
+                    dialog.dismiss();
+                    dialog.findViewById(R.id.dialogNormView).setVisibility(View.INVISIBLE);
+                }
+
+                //APPLY FILTER
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("Worker", getActivity().MODE_PRIVATE).edit();
+                editor.putBoolean("FILTER_" + DataType + "_AutoFilter", _AutoFilter);
+                editor.putBoolean("FILTER_" + DataType + "_YearFilterEnabled", _YearFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_MonthFilterEnabled", _MonthFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_DisableFilter", _DisableFilter);
+                editor.putInt("FILTER_" + DataType + "_YearFilterValue", Integer.parseInt(mYearFilterValue.getText().toString()));
+                editor.putInt("FILTER_" + DataType + "_MonthFilterValue", Integer.parseInt(mMonthFilterValue.getText().toString()));
+                if (_SortingType.equals("DESC"))
+                    editor.putString("FILTER_" + DataType + "_SortingType", "DESC");
+                else
+                    editor.putString("FILTER_" + DataType + "_SortingType", "ASC");
+                editor.commit();
+
+                mDataSet.clear();
+                mAdapter = new RecyclerViewAdapterNorm(mDataSet, NormFragment.this);
+                LoadDataFromDatabase();
+                mRecyclerView.swapAdapter(mAdapter, true);
+
+            }
+        });
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface idialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                        dialogView.post(new Runnable() {
+                            public void run() {
+                                revealShow(dialogView, false, dialog, R.id.dialogFilter, R.id.FABDialogFilter, true);
+                            }
+                        });
+                    else {
+                        dialog.dismiss();
+                        dialog.findViewById(R.id.dialogNormView).setVisibility(View.INVISIBLE);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         dialog.show();
     }
+
+
 }
