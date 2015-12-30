@@ -16,6 +16,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.*;
 import android.view.animation.AnticipateOvershootInterpolator;
@@ -101,6 +103,8 @@ public class NormFragment extends FragmentCore {
             ACC_USER = DataRecord.Account.ACC2.toString();
             ACC_Cover = ((MainActivity) getActivity()).getUser(1).getBackground();
         }
+
+        getSettingsForFilter(DataType);
 
         return fragmentView;
     }
@@ -413,7 +417,11 @@ public class NormFragment extends FragmentCore {
     public void LoadDataFromDatabase() {
         final ArrayList<DataRecord> _Norme = new ArrayList<>();
         try {
-            List<DataRecord> Tab = mDB.getRecordsByType(DataType, "DESC", ACC_USER);
+            List<DataRecord> Tab;
+            if(_DisableFilter)
+                Tab = mDB.getRecordsByType(DataType, "DESC", ACC_USER);
+            else
+                Tab = mDB.getRecordsFiltered(DataType, "DESC", ACC_USER, _SortingType,_MonthFilterEnabled , _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
             for (int i = 0; i < Tab.size(); ++i) {
                 DataRecord x = Tab.get(i);
                 _Norme.add(x);
@@ -456,14 +464,7 @@ public class NormFragment extends FragmentCore {
         iCover.setImageDrawable(ACC_Cover);
 
         //GET SETTINGS
-        final SharedPreferences prefs = getActivity().getSharedPreferences("Worker", Context.MODE_PRIVATE);
-        _AutoFilter = prefs.getBoolean("FILTER_" + DataType + "_AutoFilter", true);
-        _SortingType = prefs.getString("FILTER_" + DataType + "_SortingType", "DESC");
-        _YearFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_YearFilterEnabled", false);
-        _MonthFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_MonthFilterEnabled", false);
-        _YearFilterValue = prefs.getInt("FILTER_" + DataType + "_YearFilterValue", 0);
-        _MonthFilterValue = prefs.getInt("FILTER_" + DataType + "_MonthFilterValue", 0);
-        _DisableFilter = prefs.getBoolean("FILTER_" + DataType + "_DisableFilter", false);
+        getSettingsForFilter(DataType);
         //getViews
         final CheckBox mAutoFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxAutoFilter);
         final CheckBox mYearFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxYearFilter);
@@ -471,8 +472,8 @@ public class NormFragment extends FragmentCore {
         final CheckBox mDisableFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxDisableFilter);
         RadioButton mSortingTypeASC = (RadioButton) dialogView.findViewById(R.id.radioButtonAsc);
         RadioButton mSortingTypeDESC = (RadioButton) dialogView.findViewById(R.id.radioButtonDesc);
-        final Button mYearFilterValue = (Button) dialogView.findViewById(R.id.buttonYear);
-        final Button mMonthFilterValue = (Button) dialogView.findViewById(R.id.buttonMonth);
+        final EditText mYearFilterValue = (EditText) dialogView.findViewById(R.id.textYear);
+        final EditText mMonthFilterValue = (EditText) dialogView.findViewById(R.id.textMonth);
         final RelativeLayout mLayout1 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout1);
         final RelativeLayout mLayout2 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout2);
         final RelativeLayout mLayout3 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout3);
@@ -535,10 +536,38 @@ public class NormFragment extends FragmentCore {
                 _MonthFilterEnabled = !_MonthFilterEnabled;
             }
         });
-        mYearFilterValue.setOnClickListener(new View.OnClickListener() {
+        mYearFilterValue.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!mYearFilterValue.getText().toString().isEmpty())
+                    _YearFilterValue = Integer.parseInt(mYearFilterValue.getText().toString());
+            }
+        });
+        mMonthFilterValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!mMonthFilterValue.getText().toString().isEmpty())
+                _MonthFilterValue = Integer.parseInt(mMonthFilterValue.getText().toString());
             }
         });
 
@@ -583,8 +612,8 @@ public class NormFragment extends FragmentCore {
                 editor.putBoolean("FILTER_" + DataType + "_YearFilterEnabled", _YearFilterEnabled);
                 editor.putBoolean("FILTER_" + DataType + "_MonthFilterEnabled", _MonthFilterEnabled);
                 editor.putBoolean("FILTER_" + DataType + "_DisableFilter", _DisableFilter);
-                editor.putInt("FILTER_" + DataType + "_YearFilterValue", Integer.parseInt(mYearFilterValue.getText().toString()));
-                editor.putInt("FILTER_" + DataType + "_MonthFilterValue", Integer.parseInt(mMonthFilterValue.getText().toString()));
+                editor.putInt("FILTER_" + DataType + "_YearFilterValue", _YearFilterValue);
+                editor.putInt("FILTER_" + DataType + "_MonthFilterValue", _MonthFilterValue);
                 if (_SortingType.equals("DESC"))
                     editor.putString("FILTER_" + DataType + "_SortingType", "DESC");
                 else
@@ -621,6 +650,7 @@ public class NormFragment extends FragmentCore {
 
         dialog.show();
     }
+
 
 
 }

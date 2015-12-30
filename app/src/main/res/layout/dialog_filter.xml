@@ -128,14 +128,18 @@
                     android:checked="false"
                     android:text="Year filter" />
 
-                <Button
-                    android:id="@+id/buttonYear"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:text="Year" />
+
+                    <EditText
+                        android:id="@+id/textYear"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:hint="Year"
+                        android:inputType="numberDecimal"
+                        android:numeric="integer|decimal" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -159,14 +163,19 @@
                     android:checked="false"
                     android:text="Month filter" />
 
-                <Button
-                    android:id="@+id/buttonMonth"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:text="Month" />
+
+                    <EditText
+                        android:id="@+id/textMonth"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:hint="Month"
+                        android:inputType="numberDecimal"
+                        android:numeric="integer|decimal" />
+
             </RelativeLayout>
 
         </LinearLayout>

@@ -86,7 +86,6 @@
                           android:scrollbars="none"
                           android:textFilterEnabled="true"
                           app:mcv_weekDayTextAppearance="@style/TextAppearance.MaterialCalendarWidget.WeekDay"
-                          app:mcv_selectionColor="@drawable/custom_calendar_bg_selector"
                             app:mcv_weekDayLabels="@array/custom_weekdays"
                           app:mcv_showOtherDates="all" />
 

@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
+
+import java.util.Calendar;
 
 /**
  * Created by Metalen on 24.1.2015..
@@ -165,8 +169,7 @@ public class FragmentCore extends Fragment {
 
     protected void setEnabledLayoutsAuto(CheckBox mAutoFilter, CheckBox mDisableFilter, RelativeLayout mLayout1, RelativeLayout mLayout2, RelativeLayout mLayout3) {
 
-        if (_DisableFilter && _AutoFilter)
-        {
+        if (_DisableFilter && _AutoFilter) {
             _AutoFilter = true;
             _DisableFilter = false;
             mAutoFilter.setChecked(true);
@@ -187,10 +190,10 @@ public class FragmentCore extends Fragment {
             mDisableFilter.setEnabled(true);
         }
     }
+
     protected void setEnabledLayoutsDisabler(CheckBox mAutoFilter, CheckBox mDisableFilter, RelativeLayout mLayout1, RelativeLayout mLayout2, RelativeLayout mLayout3) {
 
-        if (_DisableFilter && _AutoFilter)
-        {
+        if (_DisableFilter && _AutoFilter) {
             _AutoFilter = true;
             _DisableFilter = false;
             mAutoFilter.setChecked(true);
@@ -210,4 +213,29 @@ public class FragmentCore extends Fragment {
             mDisableFilter.setEnabled(true);
         }
     }
+
+    protected void getSettingsForFilter(String DataType) {
+        final SharedPreferences prefs = getActivity().getSharedPreferences("Worker", Context.MODE_PRIVATE);
+        _AutoFilter = prefs.getBoolean("FILTER_" + DataType + "_AutoFilter", true);
+        _SortingType = prefs.getString("FILTER_" + DataType + "_SortingType", "DESC");
+        _YearFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_YearFilterEnabled", false);
+        _MonthFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_MonthFilterEnabled", false);
+        _YearFilterValue = prefs.getInt("FILTER_" + DataType + "_YearFilterValue", 0);
+        _MonthFilterValue = prefs.getInt("FILTER_" + DataType + "_MonthFilterValue", 0);
+        _DisableFilter = prefs.getBoolean("FILTER_" + DataType + "_DisableFilter", false);
+
+        if(_AutoFilter) setupAutoFilter();
+
+    }
+
+    private void setupAutoFilter() {
+        Calendar c = Calendar.getInstance();
+        _SortingType = "DESC";
+        _DisableFilter = false;
+        _YearFilterEnabled = true;
+        _YearFilterValue = c.get(Calendar.YEAR);
+        _MonthFilterEnabled = true;
+        _MonthFilterValue = c.get(Calendar.MONTH)+1;
+    }
+
 }

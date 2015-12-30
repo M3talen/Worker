@@ -13,43 +13,43 @@
         android:layout_height="40dp" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical|center">
+        android:gravity="center_vertical|center"
+        android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/checkBoxAutoFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Automatic filtering"
             android:layout_margin="8dp"
-            android:checked="false" />
+            android:checked="false"
+            android:text="Automatic filtering" />
 
         <CheckBox
+            android:id="@+id/checkBoxDisableFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Disable filter"
-            android:id="@+id/checkBoxDisableFilter"
-            android:layout_margin="8dp"
             android:layout_gravity="right"
-            android:checked="false" />
+            android:layout_margin="8dp"
+            android:checked="false"
+            android:text="Disable filter" />
     </LinearLayout>
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
+        android:animateLayoutChanges="true"
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/FilterLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:animateLayoutChanges="true"
             android:orientation="horizontal"
             android:padding="16dp">
 
@@ -57,11 +57,11 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center_horizontal"
                 android:text="Sorting"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -75,31 +75,28 @@
                     android:id="@+id/radioButtonAsc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ascending"
-                    android:checked="false" />
+                    android:checked="false"
+                    android:text="Ascending" />
 
                 <RadioButton
                     android:id="@+id/radioButtonDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descending"
-                    android:checked="false" />
+                    android:checked="false"
+                    android:text="Descending" />
             </RadioGroup>
 
         </RelativeLayout>
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar2" />
-
         <RelativeLayout
+            android:id="@+id/FilterLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:animateLayoutChanges="true"
+
+            android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="16dp">
@@ -110,25 +107,30 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="Year filter"
-                android:checked="false" />
+                android:checked="false"
+                android:text="Year filter" />
 
-            <Button
-                android:id="@+id/buttonYear"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:text="Year" />
+                <EditText
+                    android:id="@+id/textYear"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:hint="Year"
+                    android:inputType="numberDecimal"/>
+
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/FilterLayout3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:animateLayoutChanges="true"
+            android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="16dp">
@@ -139,17 +141,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="Month filter"
-                android:checked="false" />
+                android:checked="false"
+                android:text="Month filter" />
 
-            <Button
-                android:id="@+id/buttonMonth"
-                style="?android:attr/buttonStyleSmall"
+            <EditText
+                android:id="@+id/textMonth"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Month"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:hint="Month"
+                android:inputType="numberDecimal"
+                android:numeric="integer|decimal" />
+
         </RelativeLayout>
 
     </LinearLayout>
