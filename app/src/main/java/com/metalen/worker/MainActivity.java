@@ -24,7 +24,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     private static final int PROFILE_PIC_SIZE = 1000;
     public boolean mSignInClicked;
     MaterialAccount account, account2;
-    MaterialSection sHome, sNorm, sHolidays, sWorkHours, sOvertime, sSalary, sSettings, sCalendar;
+    MaterialSection sHome, sNorm, sHolidays, sWorkHours, sOvertime, sSalary, sSettings, sCalendar, sIntervencije, sSickLeave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +48,26 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         sHome = this.newSection("Home", this.getResources().getDrawable(R.drawable.ic_action_home), new HomeFragment());
         sCalendar = this.newSection("Calendar", this.getResources().getDrawable(R.drawable.ic_action_calendar_month), new FragmentCalendar());
-        sNorm = this.newSection("Norm", this.getResources().getDrawable(R.drawable.ic_action_calendar_day), new NormFragment());
-        sHolidays = this.newSection("Holidays", this.getResources().getDrawable(R.drawable.ic_action_calendar_month), new HolidaysFragment());
+        sIntervencije = this.newSection("Interventions", this.getResources().getDrawable(R.drawable.ic_alarm_black_24dp), new IntervencijeFragment());
+        sNorm = this.newSection("Norm", this.getResources().getDrawable(R.drawable.ic_action_calendar_month), new NormFragment());
+        sHolidays = this.newSection("Holidays", this.getResources().getDrawable(R.drawable.ic_action_calendar_day), new HolidaysFragment());
         sWorkHours = this.newSection("Work hours", this.getResources().getDrawable(R.drawable.ic_av_timer_black_24dp), new WorkHoursFragment());
         sOvertime = this.newSection("Overtime hours", this.getResources().getDrawable(R.drawable.ic_timelapse_black_24dp), new OverhoursFragment());
-        sSalary = this.newSection("Salary", this.getResources().getDrawable(R.drawable.ic_local_atm_grey600_24dp), new SalaryFragment());
+        sSalary = this.newSection("Salary", this.getResources().getDrawable(R.drawable.ic_local_atm_black_24dp), new SalaryFragment());
         sSettings = this.newSection("Settings", this.getResources().getDrawable(R.drawable.ic_settings_black_24dp), new FragmentSettings());
+        sSickLeave = this.newSection("Sick leave", this.getResources().getDrawable(R.drawable.ic_ambulance_black_24dp), new SickLeaveFragment());
 
         this.addSection(sHome);
        // this.addSection(sCalendar);
         this.addDivisor();
         this.addSection(sNorm);
-        this.addSection(sHolidays);
         this.addSection(sWorkHours);
         this.addSection(sOvertime);
+        this.addSection(sIntervencije);
+        this.addDivisor();
+        this.addSection(sHolidays);
+        this.addSection(sSickLeave);
+        this.addDivisor();
         this.addSection(sSalary);
 
         this.addBottomSection(sSettings);

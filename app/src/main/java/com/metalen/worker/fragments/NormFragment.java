@@ -16,8 +16,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.*;
 import android.view.animation.AnticipateOvershootInterpolator;
@@ -452,7 +450,7 @@ public class NormFragment extends FragmentCore {
         }
     }
 
-    protected void openFilter() {
+    public void openFilter() {
         final View dialogView = View.inflate(getActivity(), R.layout.dialog_filter, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -478,98 +476,9 @@ public class NormFragment extends FragmentCore {
         final RelativeLayout mLayout2 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout2);
         final RelativeLayout mLayout3 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout3);
         //
-        if(_DisableFilter)
-            setEnabledLayoutsDisabler(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
-        if(_AutoFilter)
-            setEnabledLayoutsAuto(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+        setupFilterParameters(mAutoFilter, mYearFilter, mMonthFilter, mDisableFilter, mSortingTypeASC, mSortingTypeDESC, mYearFilterValue, mMonthFilterValue, mLayout1, mLayout2, mLayout3);
         //
-        mAutoFilter.setChecked(_AutoFilter);
-        mDisableFilter.setChecked(_DisableFilter);
-        mYearFilter.setChecked(_YearFilterEnabled);
-        mMonthFilter.setChecked(_MonthFilterEnabled);
-        if (_SortingType.equals("DESC")) {
-            mSortingTypeDESC.setChecked(true);
-            mSortingTypeASC.setChecked(false);
-        }else
-        {
-            mSortingTypeDESC.setChecked(false);
-            mSortingTypeASC.setChecked(true);
-        }
-        mYearFilterValue.setText(_YearFilterValue + "");
-        mMonthFilterValue.setText(_MonthFilterValue + "");
-        //
-        mAutoFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                _AutoFilter = !_AutoFilter;
-                setEnabledLayoutsAuto(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
-            }
-        });
-        mDisableFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                _DisableFilter = !_DisableFilter;
-                setEnabledLayoutsDisabler(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
-            }
-        });
-        mSortingTypeDESC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                _SortingType = "ASC";
-            }
-        });
-        mSortingTypeASC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                _SortingType = "DESC";
-            }
-        });
-        mYearFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                _YearFilterEnabled = !_YearFilterEnabled;
-            }
-        });
-        mMonthFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                _MonthFilterEnabled = !_MonthFilterEnabled;
-            }
-        });
-        mYearFilterValue.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (!mYearFilterValue.getText().toString().isEmpty())
-                    _YearFilterValue = Integer.parseInt(mYearFilterValue.getText().toString());
-            }
-        });
-        mMonthFilterValue.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (!mMonthFilterValue.getText().toString().isEmpty())
-                _MonthFilterValue = Integer.parseInt(mMonthFilterValue.getText().toString());
-            }
-        });
+        setupFilterWorking(mAutoFilter, mYearFilter, mMonthFilter, mDisableFilter, mSortingTypeASC, mSortingTypeDESC, mYearFilterValue, mMonthFilterValue, mLayout1, mLayout2, mLayout3);
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
@@ -587,7 +496,7 @@ public class NormFragment extends FragmentCore {
                         }
                     });
                 else
-                    dialog.findViewById(R.id.dialogNormView).setVisibility(View.VISIBLE);
+                    dialog.findViewById(R.id.dialogFilter).setVisibility(View.VISIBLE);
 
             }
         });
@@ -603,23 +512,23 @@ public class NormFragment extends FragmentCore {
                     });
                 else {
                     dialog.dismiss();
-                    dialog.findViewById(R.id.dialogNormView).setVisibility(View.INVISIBLE);
+                    dialog.findViewById(R.id.dialogFilter).setVisibility(View.INVISIBLE);
                 }
 
                 if(_AutoFilter)
                     setupAutoFilter();
                 //APPLY FILTER
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("Worker", getActivity().MODE_PRIVATE).edit();
-                editor.putBoolean("FILTER_" + DataType + "_AutoFilter", _AutoFilter);
-                editor.putBoolean("FILTER_" + DataType + "_YearFilterEnabled", _YearFilterEnabled);
-                editor.putBoolean("FILTER_" + DataType + "_MonthFilterEnabled", _MonthFilterEnabled);
-                editor.putBoolean("FILTER_" + DataType + "_DisableFilter", _DisableFilter);
-                editor.putInt("FILTER_" + DataType + "_YearFilterValue", _YearFilterValue);
-                editor.putInt("FILTER_" + DataType + "_MonthFilterValue", _MonthFilterValue);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_AutoFilter", _AutoFilter);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_YearFilterEnabled", _YearFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_MonthFilterEnabled", _MonthFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_DisableFilter", _DisableFilter);
+                editor.putInt("FILTER_" + DataType + "_" + ACC_USER +"_YearFilterValue", _YearFilterValue);
+                editor.putInt("FILTER_" + DataType + "_" + ACC_USER +"_MonthFilterValue", _MonthFilterValue);
                 if (_SortingType.equals("DESC"))
-                    editor.putString("FILTER_" + DataType + "_SortingType", "DESC");
+                    editor.putString("FILTER_" + DataType + "_" + ACC_USER +"_SortingType", "DESC");
                 else
-                    editor.putString("FILTER_" + DataType + "_SortingType", "ASC");
+                    editor.putString("FILTER_" + DataType + "_" + ACC_USER +"_SortingType", "ASC");
                 editor.commit();
 
                 mDataSet.clear();
@@ -641,7 +550,7 @@ public class NormFragment extends FragmentCore {
                         });
                     else {
                         dialog.dismiss();
-                        dialog.findViewById(R.id.dialogNormView).setVisibility(View.INVISIBLE);
+                        dialog.findViewById(R.id.dialogFilter).setVisibility(View.INVISIBLE);
                     }
                     return true;
                 }
@@ -652,6 +561,7 @@ public class NormFragment extends FragmentCore {
 
         dialog.show();
     }
+
 
 
 

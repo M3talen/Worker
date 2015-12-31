@@ -17,7 +17,9 @@ public class DataRecord {
         NORMA,
         HOLIDAYS,
         OVERHOURS,
-        WORK_HOURS
+        WORK_HOURS,
+        INTERVENCIJE,
+        SICKLEAVE;
     }
     public enum Account{
         ACC1,

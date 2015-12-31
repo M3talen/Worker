@@ -11,11 +11,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.widget.CheckBox;
-import android.widget.RelativeLayout;
+import android.widget.*;
 
 import java.util.Calendar;
 
@@ -224,7 +225,7 @@ public class FragmentCore extends Fragment {
         _MonthFilterValue = prefs.getInt("FILTER_" + DataType + "_MonthFilterValue", 0);
         _DisableFilter = prefs.getBoolean("FILTER_" + DataType + "_DisableFilter", false);
 
-        if(_AutoFilter) setupAutoFilter();
+        if (_AutoFilter) setupAutoFilter();
 
     }
 
@@ -235,7 +236,104 @@ public class FragmentCore extends Fragment {
         _YearFilterEnabled = true;
         _YearFilterValue = c.get(Calendar.YEAR);
         _MonthFilterEnabled = true;
-        _MonthFilterValue = c.get(Calendar.MONTH)+1;
+        _MonthFilterValue = c.get(Calendar.MONTH) + 1;
     }
+
+    protected void setupFilterParameters(CheckBox mAutoFilter, CheckBox mYearFilter, CheckBox mMonthFilter, CheckBox mDisableFilter, RadioButton mSortingTypeASC, RadioButton mSortingTypeDESC, EditText mYearFilterValue, EditText mMonthFilterValue, RelativeLayout mLayout1, RelativeLayout mLayout2, RelativeLayout mLayout3) {
+        if (_DisableFilter)
+            setEnabledLayoutsDisabler(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+        if (_AutoFilter)
+            setEnabledLayoutsAuto(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+        //
+        mAutoFilter.setChecked(_AutoFilter);
+        mDisableFilter.setChecked(_DisableFilter);
+        mYearFilter.setChecked(_YearFilterEnabled);
+        mMonthFilter.setChecked(_MonthFilterEnabled);
+        if (_SortingType.equals("DESC")) {
+            mSortingTypeDESC.setChecked(true);
+            mSortingTypeASC.setChecked(false);
+        } else {
+            mSortingTypeDESC.setChecked(false);
+            mSortingTypeASC.setChecked(true);
+        }
+        mYearFilterValue.setText(_YearFilterValue + "");
+        mMonthFilterValue.setText(_MonthFilterValue + "");
+    }
+
+    protected void setupFilterWorking(final CheckBox mAutoFilter, CheckBox mYearFilter, final CheckBox mMonthFilter, final CheckBox mDisableFilter, RadioButton mSortingTypeASC, RadioButton mSortingTypeDESC, final EditText mYearFilterValue, final EditText mMonthFilterValue, final RelativeLayout mLayout1, final RelativeLayout mLayout2, final RelativeLayout mLayout3) {
+        mAutoFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _AutoFilter = !_AutoFilter;
+                setEnabledLayoutsAuto(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+            }
+        });
+        mDisableFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _DisableFilter = !_DisableFilter;
+                setEnabledLayoutsDisabler(mAutoFilter, mDisableFilter, mLayout1, mLayout2, mLayout3);
+            }
+        });
+        mSortingTypeDESC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _SortingType = "ASC";
+            }
+        });
+        mSortingTypeASC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _SortingType = "DESC";
+            }
+        });
+        mYearFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _YearFilterEnabled = !_YearFilterEnabled;
+            }
+        });
+        mMonthFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                _MonthFilterEnabled = !_MonthFilterEnabled;
+            }
+        });
+        mYearFilterValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!mYearFilterValue.getText().toString().isEmpty())
+                    _YearFilterValue = Integer.parseInt(mYearFilterValue.getText().toString());
+            }
+        });
+        mMonthFilterValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!mMonthFilterValue.getText().toString().isEmpty())
+                    _MonthFilterValue = Integer.parseInt(mMonthFilterValue.getText().toString());
+            }
+        });
+    }
+
 
 }

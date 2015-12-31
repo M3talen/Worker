@@ -19,9 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.*;
 import android.view.animation.AnticipateOvershootInterpolator;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
+import android.widget.*;
 import com.metalen.worker.MainActivity;
 import com.metalen.worker.R;
 import com.metalen.worker.SQL.SQLHandler;
@@ -104,6 +102,10 @@ public class OverhoursFragment extends FragmentCore {
             ACC_USER = DataRecord.Account.ACC2.toString();
             ACC_Cover = ((MainActivity) getActivity()).getUser(1).getBackground();
         }
+
+        this.setHasOptionsMenu(true);
+        getSettingsForFilter(DataType);
+
         return fragmentView;
     }
 
@@ -607,7 +609,11 @@ public class OverhoursFragment extends FragmentCore {
     public void LoadDataFromDatabase() {
         final ArrayList<DataRecord> _WorkHours = new ArrayList<>();
         try {
-            List<DataRecord> Tab = mDB.getRecordsByType(DataType, "DESC", ACC_USER);
+            List<DataRecord> Tab;
+            if(_DisableFilter)
+                Tab = mDB.getRecordsByType(DataType, "DESC", ACC_USER);
+            else
+                Tab = mDB.getRecordsFiltered(DataType, _SortingType, ACC_USER ,_MonthFilterEnabled , _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
             for (int i = 0; i < Tab.size(); ++i) {
                 DataRecord x = Tab.get(i);
                 _WorkHours.add(x);
@@ -619,5 +625,136 @@ public class OverhoursFragment extends FragmentCore {
             mAdapter.addItem(_WorkHours.get(i), RecyclerViewAdapterOverhours.LAST_POSITION);
         }
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_filter:
+                openFilter();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void openFilter() {
+        final View dialogView = View.inflate(getActivity(), R.layout.dialog_filter, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = builder.create();
+//
+        final ImageView iCover = (ImageView) dialogView.findViewById(R.id.header);
+        iCover.setImageDrawable(ACC_Cover);
+
+        //GET SETTINGS
+        getSettingsForFilter(DataType);
+        //getViews
+        final CheckBox mAutoFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxAutoFilter);
+        final CheckBox mYearFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxYearFilter);
+        final CheckBox mMonthFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxMonthFilter);
+        final CheckBox mDisableFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxDisableFilter);
+        RadioButton mSortingTypeASC = (RadioButton) dialogView.findViewById(R.id.radioButtonAsc);
+        RadioButton mSortingTypeDESC = (RadioButton) dialogView.findViewById(R.id.radioButtonDesc);
+        final EditText mYearFilterValue = (EditText) dialogView.findViewById(R.id.textYear);
+        final EditText mMonthFilterValue = (EditText) dialogView.findViewById(R.id.textMonth);
+        final RelativeLayout mLayout1 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout1);
+        final RelativeLayout mLayout2 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout2);
+        final RelativeLayout mLayout3 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout3);
+        //
+        setupFilterParameters(mAutoFilter, mYearFilter, mMonthFilter, mDisableFilter, mSortingTypeASC, mSortingTypeDESC, mYearFilterValue, mMonthFilterValue, mLayout1, mLayout2, mLayout3);
+        //
+        setupFilterWorking(mAutoFilter, mYearFilter, mMonthFilter, mDisableFilter, mSortingTypeASC, mSortingTypeDESC, mYearFilterValue, mMonthFilterValue, mLayout1, mLayout2, mLayout3);
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogs) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    dialogView.post(new Runnable() {
+                        public void run() {
+                            dialogView.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    revealShow(dialogView, true, dialog, R.id.dialogFilter, R.id.FABDialogFilter);
+                                }
+                            }, 200);
+
+                        }
+                    });
+                else
+                    dialog.findViewById(R.id.dialogFilter).setVisibility(View.VISIBLE);
+
+            }
+        });
+        dialogView.findViewById(R.id.FABDialogFilter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    dialogView.post(new Runnable() {
+                        public void run() {
+                            revealShow(dialogView, false, dialog, R.id.dialogFilter, R.id.FABDialogFilter, true);
+                        }
+                    });
+                else {
+                    dialog.dismiss();
+                    dialog.findViewById(R.id.dialogFilter).setVisibility(View.INVISIBLE);
+                }
+
+                if(_AutoFilter)
+                    setupAutoFilter();
+                //APPLY FILTER
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("Worker", getActivity().MODE_PRIVATE).edit();
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_AutoFilter", _AutoFilter);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_YearFilterEnabled", _YearFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_MonthFilterEnabled", _MonthFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_DisableFilter", _DisableFilter);
+                editor.putInt("FILTER_" + DataType + "_" + ACC_USER +"_YearFilterValue", _YearFilterValue);
+                editor.putInt("FILTER_" + DataType + "_" + ACC_USER +"_MonthFilterValue", _MonthFilterValue);
+                if (_SortingType.equals("DESC"))
+                    editor.putString("FILTER_" + DataType + "_" + ACC_USER +"_SortingType", "DESC");
+                else
+                    editor.putString("FILTER_" + DataType + "_" + ACC_USER +"_SortingType", "ASC");
+                editor.commit();
+
+                mDataSet.clear();
+                mAdapter = new RecyclerViewAdapterOverhours(mDataSet, OverhoursFragment.this);
+                LoadDataFromDatabase();
+                mRecyclerView.swapAdapter(mAdapter, true);
+
+            }
+        });
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface idialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                        dialogView.post(new Runnable() {
+                            public void run() {
+                                revealShow(dialogView, false, dialog, R.id.dialogFilter, R.id.FABDialogFilter, true);
+                            }
+                        });
+                    else {
+                        dialog.dismiss();
+                        dialog.findViewById(R.id.dialogFilter).setVisibility(View.INVISIBLE);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        dialog.show();
+    }
+
 
 }
