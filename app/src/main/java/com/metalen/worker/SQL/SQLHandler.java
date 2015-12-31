@@ -199,22 +199,11 @@ public class SQLHandler extends SQLiteOpenHelper {
         return Record;
     }
 
-    public List<DataRecord> getRecordsFiltered(String tType, String tDate, String tSort, String tACC, boolean _MonthFilterEnabled, int monthFilterValue, boolean _YearFilterEnabled, int yearFilterValue) {
+    public List<DataRecord> getRecordsFiltered(String tType, String tSort, String tACC,  boolean _MonthFilterEnabled, int monthFilterValue, boolean _YearFilterEnabled, int yearFilterValue) {
         List<DataRecord> Record = new LinkedList<DataRecord>();
         String query = "";
-        if (new String(tSort).equals("ASC")) {
-            query = "SELECT * FROM " + TABLE_RECORDS + " WHERE ACC = '" + tACC + "' AND TYPE = '" + tType + "' AND DATE = '" + tDate + "' ORDER BY CAST(substr(DATE,7) AS INTEGER) ASC, CAST(substr(DATE,4,2) AS INTEGER) ASC";
-        }
-        if (new String(tSort).equals("DESC")) {
-            query = "SELECT * FROM " + TABLE_RECORDS + " WHERE ACC = '" + tACC + "' AND TYPE = '" + tType + "' AND DATE = '" + tDate + "' ORDER BY CAST(substr(DATE,7) AS INTEGER) DESC, CAST(substr(DATE,4,2) AS INTEGER) DESC";
-        }
         if (_MonthFilterEnabled)
-            query = "SELECT" +
-                    " *" +
-                    " FROM" +
-                    " DataRecords" +
-                    " WHERE" +
-                    " ACC = '" + tACC + "'" +
+            query = "SELECT * FROM DataRecords WHERE ACC = '" + tACC + "'" +
                     " AND TYPE = '" + tType + "'" +
                     " AND CAST (substr(DATE, 4, 2) AS INTEGER) = '" + monthFilterValue + "'" +
                     " ORDER BY" +

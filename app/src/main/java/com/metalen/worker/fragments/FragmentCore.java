@@ -228,7 +228,7 @@ public class FragmentCore extends Fragment {
 
     }
 
-    private void setupAutoFilter() {
+    protected void setupAutoFilter() {
         Calendar c = Calendar.getInstance();
         _SortingType = "DESC";
         _DisableFilter = false;

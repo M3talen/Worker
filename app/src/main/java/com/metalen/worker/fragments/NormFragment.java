@@ -421,7 +421,7 @@ public class NormFragment extends FragmentCore {
             if(_DisableFilter)
                 Tab = mDB.getRecordsByType(DataType, "DESC", ACC_USER);
             else
-                Tab = mDB.getRecordsFiltered(DataType, "DESC", ACC_USER, _SortingType,_MonthFilterEnabled , _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
+                Tab = mDB.getRecordsFiltered(DataType, _SortingType, ACC_USER ,_MonthFilterEnabled , _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
             for (int i = 0; i < Tab.size(); ++i) {
                 DataRecord x = Tab.get(i);
                 _Norme.add(x);
@@ -452,7 +452,7 @@ public class NormFragment extends FragmentCore {
         }
     }
 
-    public void openFilter() {
+    protected void openFilter() {
         final View dialogView = View.inflate(getActivity(), R.layout.dialog_filter, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -606,6 +606,8 @@ public class NormFragment extends FragmentCore {
                     dialog.findViewById(R.id.dialogNormView).setVisibility(View.INVISIBLE);
                 }
 
+                if(_AutoFilter)
+                    setupAutoFilter();
                 //APPLY FILTER
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("Worker", getActivity().MODE_PRIVATE).edit();
                 editor.putBoolean("FILTER_" + DataType + "_AutoFilter", _AutoFilter);
