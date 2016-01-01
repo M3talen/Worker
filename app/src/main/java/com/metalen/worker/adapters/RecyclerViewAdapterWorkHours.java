@@ -2,6 +2,7 @@ package com.metalen.worker.adapters;
 
 import android.content.res.Resources;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,7 +103,7 @@ public class RecyclerViewAdapterWorkHours extends RecyclerViewAdapterCore {
                             }
                         });
 
-                        mButton3= (Button) holder.mView.findViewById(R.id.btn3);
+                        mButton3 = (Button) holder.mView.findViewById(R.id.btn3);
                         mButton3.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v) {
                                 mFragment.ButtonDelete(position);
@@ -120,6 +121,13 @@ public class RecyclerViewAdapterWorkHours extends RecyclerViewAdapterCore {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+            }
+        });
+        ((CardView) holder.mView.findViewById(R.id.primaryContentCardView)).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                ((ViewPager) holder.mView).setCurrentItem(1, true);
+                return false;
             }
         });
     }

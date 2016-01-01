@@ -127,8 +127,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     public void getProfileInformation() {
         try {
             SharedPreferences prefs2 = getSharedPreferences("Worker", MODE_PRIVATE);
-            account.setTitle(prefs2.getString("User0", " "));
-            account.setSubTitle(prefs2.getString("Job0", " "));
+            account.setTitle(prefs2.getString("User0", "Edit account"));
+            account.setSubTitle(prefs2.getString("Job0", " in settings"));
             account2.setTitle(prefs2.getString("User1", " "));
             account2.setSubTitle(prefs2.getString("Job1", " "));
 

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="custom_weekdays">
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+    </string-array>
+
     <string name="app_name">Worker</string>
     <string name="account_no1">Kornisnik 1</string>
     <string name="account_no2">Kornisnik 2</string>

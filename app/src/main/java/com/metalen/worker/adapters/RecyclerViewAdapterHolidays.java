@@ -2,13 +2,13 @@ package com.metalen.worker.adapters;
 
 import android.content.res.Resources;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.metalen.worker.R;
 import com.metalen.worker.classes.DataRecord;
 import com.metalen.worker.fragments.HolidaysFragment;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class RecyclerViewAdapterHolidays extends RecyclerViewAdapterCore {
 
-    private Button mButton1,mButton2,mButton3;
+    private Button mButton1, mButton2, mButton3;
     private HolidaysFragment mFragment;
 
     public RecyclerViewAdapterHolidays(List<DataRecord> dataSet, HolidaysFragment fragment) {
@@ -82,7 +82,7 @@ public class RecyclerViewAdapterHolidays extends RecyclerViewAdapterCore {
                             }
                         });
 
-                        mButton3= (Button) holder.mView.findViewById(R.id.btn3);
+                        mButton3 = (Button) holder.mView.findViewById(R.id.btn3);
                         mButton3.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v) {
                                 mFragment.ButtonDelete(position);
@@ -100,6 +100,13 @@ public class RecyclerViewAdapterHolidays extends RecyclerViewAdapterCore {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+            }
+        });
+        ((CardView) holder.mView.findViewById(R.id.primaryContentCardView)).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                ((ViewPager) holder.mView).setCurrentItem(1, true);
+                return false;
             }
         });
     }

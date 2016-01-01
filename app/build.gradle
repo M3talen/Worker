@@ -5,11 +5,11 @@ android {
     buildToolsVersion '23.0.2'
 
     defaultConfig {
-        applicationId "com.m3talen.worker2"
+        applicationId "com.metalen.worker"
         minSdkVersion 18
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "2.01"
     }
     buildTypes {
         release {

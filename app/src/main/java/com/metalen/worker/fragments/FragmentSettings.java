@@ -314,11 +314,15 @@ public class FragmentSettings extends FragmentCore {
 
         mTextUser1.setText(account.getTitle());
         mTextJob1.setText(account.getSubTitle());
-        mIcon1.setImageBitmap(((BitmapDrawable) account.getCircularPhoto()).getBitmap());
+        try {
+            mIcon1.setImageBitmap(((BitmapDrawable) account.getCircularPhoto()).getBitmap());
+        }catch (Exception e){e.printStackTrace();}
 
         mTextUser2.setText(account1.getTitle());
         mTextJob2.setText(account1.getSubTitle());
+        try{
         mIcon2.setImageBitmap(((BitmapDrawable) account1.getCircularPhoto()).getBitmap());
+        }catch (Exception e){e.printStackTrace();}
     }
 
     private boolean isPackageInstalled(String packagename, Context context) {
@@ -488,6 +492,7 @@ public class FragmentSettings extends FragmentCore {
                 final File mFile = new File(direct + "/" + dFileName + ".jpg");
 
                 try {
+                    if(!direct.exists())direct.mkdir();
                     out = new FileOutputStream(mFile);
                     decodedImage.compress(Bitmap.CompressFormat.JPEG, 90, out);
                 } catch (Exception e) {

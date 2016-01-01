@@ -1,17 +1,22 @@
 package com.metalen.worker.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
+import com.metalen.worker.MainActivity;
 import com.metalen.worker.R;
 import com.metalen.worker.SQL.SQLHandler;
 import com.metalen.worker.classes.DataRecord;
@@ -38,11 +43,18 @@ public class HomeFragment extends FragmentCore {
 
     SQLHandler mDB;
     ValueLineChart mChartNorm;
-    TextView mStat1, mStat2, mNormStat, mHolidayStat, mWHStat, mOHStat;
+    TextView mStat1, mStat2, mNormStat, mHolidayStat, mWHStat, mOHStat, mSLStat ,mInterventionStat;
     ArrayList<DataRecord> _Norme = null;
     ArrayList<DataRecord> _Holidays = null;
     ArrayList<DataRecord> _WorkHours = null;
+    ArrayList<DataRecord> _SickLave = null;
+    ArrayList<DataRecord> _InterventionHours = null;
+
+    String DataType = "HOME";
+
+    private int ACC = 1;
     private String ACC_USER = "";
+    private Drawable ACC_Cover;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,15 +68,23 @@ public class HomeFragment extends FragmentCore {
         mHolidayStat = (TextView) fragmentView.findViewById(R.id.home_et_2);
         mWHStat = (TextView) fragmentView.findViewById(R.id.home_et_3);
         mOHStat = (TextView) fragmentView.findViewById(R.id.home_et_4);
+        mSLStat = (TextView) fragmentView.findViewById(R.id.home_et_5);
+        mInterventionStat = (TextView) fragmentView.findViewById(R.id.home_et_6);
 
         mDB = new SQLHandler(getActivity());
 
         SharedPreferences prefs = getActivity().getSharedPreferences("Worker", Context.MODE_PRIVATE);
-        int ACC = prefs.getInt("ACC", 1);
-        if (ACC == 1)
+        ACC = prefs.getInt("ACC", 1);
+        if (ACC == 1) {
             ACC_USER = DataRecord.Account.ACC1.toString();
-        else
+            ACC_Cover = ((MainActivity) getActivity()).getUser(0).getBackground();
+        } else {
             ACC_USER = DataRecord.Account.ACC2.toString();
+            ACC_Cover = ((MainActivity) getActivity()).getUser(1).getBackground();
+        }
+
+        this.setHasOptionsMenu(true);
+        getSettingsForFilter(DataType, ACC_USER);
 
         buildChart();
 
@@ -85,7 +105,7 @@ public class HomeFragment extends FragmentCore {
         });
 
         final Date today = new Date();
-        calendar.setDateSelected(today,true);
+        calendar.setDateSelected(today, true);
         calendar.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -94,8 +114,18 @@ public class HomeFragment extends FragmentCore {
         }, 300);
 
 
-        String stats1 = String.format("Average norm : <b>%s</b><br>Used holidays : <b>%s</b><br>Worked hours : <b>%s</b>", String.format("%.2f", (float) getAverageNorm()), String.format("%.2f", (float) getUsedHolidays()), getWorkedHours());
-        String stats2 = String.format("Overhours paid : <b>%s</b><br>Overhours used : <b>%s</b><br>Overhours unused : <b>%s</b>", getFakeOverhours(DataRecord.OHMode.PAID.toString()), getFakeOverhours(DataRecord.OHMode.USED.toString()), getFakeOverhours(DataRecord.OHMode.UNUSED.toString()));
+        String stats1 = String.format("Average norm : <b>%s</b><br>Used holidays : <b>%s</b><br>Worked hours : <b>%s</b><br>Sick leave hours : <b>%s</b>",
+                String.format("%.2f", (float) getAverageNorm()),
+                String.format("%.2f", (float) getUsedHolidays()),
+                getWorkedHours(),
+                String.format("%.2f", (float) getSickLeaveHours()));
+
+        String stats2 = String.format("Overhours paid : <b>%s</b><br>Overhours used : <b>%s</b><br>Overhours unused : <b>%s</b><br>Intervention hours : <b>%s</b>",
+                getOverhours(DataRecord.OHMode.PAID.toString()),
+                getOverhours(DataRecord.OHMode.USED.toString()),
+                getOverhours(DataRecord.OHMode.UNUSED.toString()),
+                getInterventionHours());
+
         mStat1.setText(Html.fromHtml(stats1));
         mStat2.setText(Html.fromHtml(stats2));
        /* mNormAvg.setText("Average norm is " + getAverageNorm() + System.getProperty("line.separator")
@@ -113,9 +143,11 @@ public class HomeFragment extends FragmentCore {
         mNormStat.setVisibility(View.GONE);
         mHolidayStat.setVisibility(View.GONE);
         mWHStat.setVisibility(View.GONE);
+        mSLStat.setVisibility(View.GONE);
+        mInterventionStat.setVisibility(View.GONE);
 
         try {
-            List<DataRecord> Tab3 = mDB.getRecordsByDate(final_date, "ASC", ACC_USER);  //TO-DO add difrent filter
+            List<DataRecord> Tab3 = mDB.getRecordsByDate(final_date, "ASC", ACC_USER);
             for (int i = 0; i < Tab3.size(); ++i) {
                 DataRecord x = Tab3.get(i);
                 Log.d("aaaa", x.getTYPE() + "  " + x.getDATA_1());
@@ -140,6 +172,14 @@ public class HomeFragment extends FragmentCore {
                     if (x.getDATA_3().equals(DataRecord.OHMode.USED.toString()))
                         mOHStat.setText("Unused " + x.getDATA_1() + " - " + x.getDATA_2());
                 }
+                if (x.getTYPE().equals(DataRecord.Type.SICKLEAVE.toString())) {
+                    mSLStat.setVisibility(View.VISIBLE);
+                    mSLStat.setText(x.getDATA_1() + " h");
+                }
+                if (x.getTYPE().equals(DataRecord.Type.INTERVENCIJE.toString())) {
+                    mInterventionStat.setVisibility(View.VISIBLE);
+                    mInterventionStat.setText(x.getDATA_1() + " - " + x.getDATA_2());
+                }
             }
         } catch (SQLException ex) {
             Log.d("A", "" + ex.getMessage());
@@ -160,9 +200,15 @@ public class HomeFragment extends FragmentCore {
         _Norme = new ArrayList<>();
         _Holidays = new ArrayList<>();
         _WorkHours = new ArrayList<>();
+        _SickLave = new ArrayList<>();
+        _InterventionHours = new ArrayList<>();
 
         try {
-            List<DataRecord> Tab = mDB.getRecordsByType(DataRecord.Type.NORMA.toString(), "ASC", ACC_USER);  //TO-DO add difrent filter
+            List<DataRecord> Tab;
+            if (_DisableFilter)
+                Tab = mDB.getRecordsByType(DataRecord.Type.NORMA.toString(), "ASC", ACC_USER);
+            else
+                Tab = mDB.getRecordsFiltered(DataRecord.Type.NORMA.toString(), _SortingType, ACC_USER, _MonthFilterEnabled, _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
             for (int i = 0; i < Tab.size(); ++i) {
                 DataRecord x = Tab.get(i);
                 if (!x.getDATA_1().equals("")) {
@@ -174,18 +220,52 @@ public class HomeFragment extends FragmentCore {
                     _Norme.add(x);
                 }
             }
-            List<DataRecord> Tab2 = mDB.getRecordsByType(DataRecord.Type.HOLIDAYS.toString(), "ASC", ACC_USER);  //TO-DO add difrent filter
+
+            List<DataRecord> Tab2;
+            if (_DisableFilter)
+                Tab2 = mDB.getRecordsByType(DataRecord.Type.HOLIDAYS.toString(), "ASC", ACC_USER);
+            else
+                Tab2 = mDB.getRecordsFiltered(DataRecord.Type.HOLIDAYS.toString(), _SortingType, ACC_USER, _MonthFilterEnabled, _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
             for (int i = 0; i < Tab2.size(); ++i) {
                 DataRecord x = Tab2.get(i);
                 if (!x.getDATA_1().equals("")) {
                     _Holidays.add(x);
                 }
             }
-            List<DataRecord> Tab3 = mDB.getRecordsByType(DataRecord.Type.WORK_HOURS.toString(), "ASC", ACC_USER);  //TO-DO add difrent filter
+
+            List<DataRecord> Tab3;
+            if (_DisableFilter)
+                Tab3 = mDB.getRecordsByType(DataRecord.Type.WORK_HOURS.toString(), "ASC", ACC_USER);
+            else
+                Tab3 = mDB.getRecordsFiltered(DataRecord.Type.WORK_HOURS.toString(), _SortingType, ACC_USER, _MonthFilterEnabled, _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
             for (int i = 0; i < Tab3.size(); ++i) {
                 DataRecord x = Tab3.get(i);
                 if (!x.getDATA_1().equals("")) {
                     _WorkHours.add(x);
+                }
+            }
+
+            List<DataRecord> Tab4;
+            if (_DisableFilter)
+                Tab4 = mDB.getRecordsByType(DataRecord.Type.SICKLEAVE.toString(), "ASC", ACC_USER);
+            else
+                Tab4 = mDB.getRecordsFiltered(DataRecord.Type.SICKLEAVE.toString(), _SortingType, ACC_USER, _MonthFilterEnabled, _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
+            for (int i = 0; i < Tab4.size(); ++i) {
+                DataRecord x = Tab4.get(i);
+                if (!x.getDATA_1().equals("")) {
+                    _SickLave.add(x);
+                }
+            }
+
+            List<DataRecord> Tab5;
+            if (_DisableFilter)
+                Tab5 = mDB.getRecordsByType(DataRecord.Type.INTERVENCIJE.toString(), "ASC", ACC_USER);
+            else
+                Tab5 = mDB.getRecordsFiltered(DataRecord.Type.INTERVENCIJE.toString(), _SortingType, ACC_USER, _MonthFilterEnabled, _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
+            for (int i = 0; i < Tab5.size(); ++i) {
+                DataRecord x = Tab5.get(i);
+                if (!x.getDATA_1().equals("")) {
+                    _InterventionHours.add(x);
                 }
             }
 
@@ -221,6 +301,17 @@ public class HomeFragment extends FragmentCore {
 
             for (int i = 0; i < _Holidays.size(); i++) {
                 sum = sum + Float.parseFloat(_Holidays.get(i).getDATA_1());
+            }
+        }
+        return sum;
+    }
+
+    public float getSickLeaveHours() {
+        float sum = 0;
+        if (_SickLave.size() != 0) {
+
+            for (int i = 0; i < _SickLave.size(); i++) {
+                sum = sum + Float.parseFloat(_SickLave.get(i).getDATA_1());
             }
         }
         return sum;
@@ -266,7 +357,48 @@ public class HomeFragment extends FragmentCore {
         return pad(mHourSum) + ":" + pad(mMinSum);
     }
 
-    public String getFakeOverhours(String tMODE) {
+    public String getInterventionHours() {
+
+        int mMinSum = 0;
+        int mHourSum = 0;
+
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+
+        if (_InterventionHours.size() != 0) {
+            for (int i = 0; i < _InterventionHours.size(); i++) {
+                String[] Data1 = _InterventionHours.get(i).getDATA_1().split(":");
+                String[] Data2 = _InterventionHours.get(i).getDATA_1().split(":");
+
+                String tData1 = _InterventionHours.get(i).getDATA_1();
+                String tData2 = _InterventionHours.get(i).getDATA_2();
+
+                Date date1 = null;
+                Date date2 = null;
+                try {
+                    date1 = format.parse(tData1);
+                    date2 = format.parse(tData2);
+                } catch (ParseException e) {
+                }
+                long difference = date2.getTime() - date1.getTime();
+                int Hours = (int) (difference / (1000 * 60 * 60));
+                int Mins = (int) (difference / (1000 * 60)) % 60;
+                if (Hours < 0) Hours = Hours + 24;
+                if (Mins < 0) Mins = Mins + 60;
+
+                mHourSum = mHourSum + Hours;
+                mMinSum = mMinSum + Mins;
+            }
+            while (mMinSum >= 60) {
+                mMinSum = mMinSum - 60;
+                mHourSum++;
+            }
+        }
+
+        return pad(mHourSum) + ":" + pad(mMinSum);
+    }
+
+
+    public String getOverhours(String tMODE) {
 
         int mMinSum = 0;
         int mHourSum = 0;
@@ -277,7 +409,12 @@ public class HomeFragment extends FragmentCore {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 
         try {
-            List<DataRecord> Tab3 = mDB.getRecordsByType(DataRecord.Type.OVERHOURS.toString(), "ASC", ACC_USER);  //TO-DO add difrent filter
+            List<DataRecord> Tab3;
+            if (_DisableFilter)
+                Tab3 = mDB.getRecordsByType(DataRecord.Type.OVERHOURS.toString(), "DESC", ACC_USER);
+            else
+                Tab3 = mDB.getRecordsFiltered(DataRecord.Type.OVERHOURS.toString(), _SortingType, ACC_USER, _MonthFilterEnabled, _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
+
             for (int i = 0; i < Tab3.size(); ++i) {
                 DataRecord x = Tab3.get(i);
                 if (!x.getDATA_1().equals("")) {
@@ -322,6 +459,134 @@ public class HomeFragment extends FragmentCore {
             return "00:00";
 
         return pad(mHourSum) + ":" + pad(mMinSum);
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_filter:
+                openFilter();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void openFilter() {
+        final View dialogView = View.inflate(getActivity(), R.layout.dialog_filter, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(dialogView)
+                .setCancelable(false);
+        final AlertDialog dialog = builder.create();
+//
+        final ImageView iCover = (ImageView) dialogView.findViewById(R.id.header);
+        iCover.setImageDrawable(ACC_Cover);
+
+        //GET SETTINGS
+        getSettingsForFilter(DataType, ACC_USER);
+        //getViews
+        final CheckBox mAutoFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxAutoFilter);
+        final CheckBox mYearFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxYearFilter);
+        final CheckBox mMonthFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxMonthFilter);
+        final CheckBox mDisableFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxDisableFilter);
+        RadioButton mSortingTypeASC = (RadioButton) dialogView.findViewById(R.id.radioButtonAsc);
+        RadioButton mSortingTypeDESC = (RadioButton) dialogView.findViewById(R.id.radioButtonDesc);
+        final EditText mYearFilterValue = (EditText) dialogView.findViewById(R.id.textYear);
+        final EditText mMonthFilterValue = (EditText) dialogView.findViewById(R.id.textMonth);
+        final RelativeLayout mLayout1 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout1);
+        final RelativeLayout mLayout2 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout2);
+        final RelativeLayout mLayout3 = (RelativeLayout) dialogView.findViewById(R.id.FilterLayout3);
+        //
+        setupFilterParameters(mAutoFilter, mYearFilter, mMonthFilter, mDisableFilter, mSortingTypeASC, mSortingTypeDESC, mYearFilterValue, mMonthFilterValue, mLayout1, mLayout2, mLayout3);
+        //
+        setupFilterWorking(mAutoFilter, mYearFilter, mMonthFilter, mDisableFilter, mSortingTypeASC, mSortingTypeDESC, mYearFilterValue, mMonthFilterValue, mLayout1, mLayout2, mLayout3);
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogs) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    dialogView.post(new Runnable() {
+                        public void run() {
+                            dialogView.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    revealShow(dialogView, true, dialog, R.id.dialogFilter, R.id.FABDialogFilter);
+                                }
+                            }, 200);
+
+                        }
+                    });
+                else
+                    dialog.findViewById(R.id.dialogFilter).setVisibility(View.VISIBLE);
+
+            }
+        });
+        dialogView.findViewById(R.id.FABDialogFilter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    dialogView.post(new Runnable() {
+                        public void run() {
+                            revealShow(dialogView, false, dialog, R.id.dialogFilter, R.id.FABDialogFilter, true);
+                        }
+                    });
+                else {
+                    dialog.dismiss();
+                    dialog.findViewById(R.id.dialogFilter).setVisibility(View.INVISIBLE);
+                }
+
+                if (_AutoFilter)
+                    setupAutoFilter();
+                //APPLY FILTER
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("Worker", getActivity().MODE_PRIVATE).edit();
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER + "_AutoFilter", _AutoFilter);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER + "_YearFilterEnabled", _YearFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER + "_MonthFilterEnabled", _MonthFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER + "_DisableFilter", _DisableFilter);
+                editor.putInt("FILTER_" + DataType + "_" + ACC_USER + "_YearFilterValue", _YearFilterValue);
+                editor.putInt("FILTER_" + DataType + "_" + ACC_USER + "_MonthFilterValue", _MonthFilterValue);
+                if (_SortingType.equals("DESC"))
+                    editor.putString("FILTER_" + DataType + "_" + ACC_USER + "_SortingType", "DESC");
+                else
+                    editor.putString("FILTER_" + DataType + "_" + ACC_USER + "_SortingType", "ASC");
+                editor.commit();
+
+                ((MainActivity) getActivity()).forceUpdateFragment();
+
+            }
+        });
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface idialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                        dialogView.post(new Runnable() {
+                            public void run() {
+                                revealShow(dialogView, false, dialog, R.id.dialogFilter, R.id.FABDialogFilter, true);
+                            }
+                        });
+                    else {
+                        dialog.dismiss();
+                        dialog.findViewById(R.id.dialogFilter).setVisibility(View.INVISIBLE);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        dialog.show();
     }
 
 

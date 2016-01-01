@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="custom_weekdays">
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+    </string-array>
+
     <string name="app_name">Worker</string>
     <string name="account_no1">Uporabnik 1</string>
     <string name="account_no2">Uporabnik 2</string>
@@ -22,4 +32,66 @@
     <string name="interventions_title">Intervencije</string>
     <string name="login_gp">Prijava s Google+</string>
     <string name="button_ok">Ok</string>
+
+    <string name="norm_status_import"><![CDATA[Norm status : <b>Najdeno</b>]]></string>
+    <string name="norm_title">Norma</string>
+    <string name="overtimehours_title">Nadurno delo</string>
+                                                <string name="salary_title">Plaća</string>
+    <string name="settings_import">Uvoz</string>
+    <string name="settings_import_text">Ali ste prepričani da želite uvoziti podatke iz aplikacije Norma</string>
+    <string name="settings_importing">Uvoz v teku...</string>
+    <string name="settings_title">Nastavitve</string>
+    <string name="text_account">Uporabnik</string>
+    <string name="text_additions">Dodatki</string>
+    <string name="text_advmode">Napredan način</string>
+    <string name="text_areyousure">Ali ste prepričani da želite izbrisati zapis?</string>
+    <string name="text_brutonetto">Bruto : %1$s Eur\nNeto : %2$s Eur</string>
+    <string name="text_card_delete">Odstrani</string>
+    <string name="text_card_edit">Urejaj</string>
+    <string name="text_choseAccount">Izberite uporabnika za uvoz</string>
+    <string name="text_coef">Koeficient</string>
+    <string name="text_coef2">Koeficient</string>
+    <string name="text_data">Podatki</string>
+    <string name="text_date">Datum</string>
+    <string name="text_dedamount">Znesek odbitka</string>
+    <string name="text_deleting">Brisanje</string>
+    <string name="text_edit">Urejaj</string>
+    <string name="text_endhour">Ura zaključka</string>
+    <string name="text_error">Napaka</string>
+    <string name="text_filter">Filter</string>
+    <string name="text_gp_login">PRIJAVA</string>
+    <string name="text_gp_logout">ODJAVA</string>
+    <string name="text_hi">Zdrastveno zavarovanje [%]</string>
+    <string name="text_holidays">Dopust</string>
+    <string name="text_home_1"><![CDATA[Povprečna norma : <b>%1$s</b><br>                                         Izkoriščeni dopust : <b>%2$s</b><br>                                         Odrađeni sati : <b>%3$s</b><br>                                         Bolovanja : <b>%4$s</b>]]></string>
+    <string name="text_home_paid"><![CDATA[Plačano (%1$s)<br>%2$s - %3$s]]></string>
+    <string name="text_home_2"><![CDATA[Plačane nadure : <b>%1$s</b><br>                                         Izkoriščene nadure  : <b>%2$s</b><br>                                         Neizkoriščene nadure : <b>%3$s</b><br>                                         Intervencije : <b>%4$s</b>]]></string>
+    <string name="text_home_unused">Nekorišteno %1$s - %2$s</string>
+    <string name="text_home_used"><![CDATA[Korišteno (%1$s)<br>%2$s - %3$s]]></string>
+    <string name="text_hours">Sati</string>
+    <string name="text_import">Uvoz</string>
+    <string name="text_job">Posao</string>
+    <string name="text_name">Ime</string>
+    <string name="text_needtocratebackup">Trebate napraviti backup u aplikaciji Norma</string>
+    <string name="text_no">Ne</string>
+    <string name="text_norm">Norma</string>
+    <string name="text_ok">Ok</string>
+    <string name="text_overhours">Prekovremeni sati</string>
+    <string name="text_paid">Plaćeno</string>
+    <string name="text_perded">Osobni odbitak</string>
+    <string name="text_pi1">Mirovinsko osiguranje [%]</string>
+    <string name="text_pph">Satnica</string>
+    <string name="text_salary">Plaća</string>
+    <string name="text_sickleave_title">Bolovanje</string>
+    <string name="text_starthour">Sat početka</string>
+    <string name="text_tax">Porez</string>
+    <string name="text_tax1">Porez (I) [%]</string>
+    <string name="text_tax2">Porez (II) [%]</string>
+    <string name="text_tax3">Porez (III) [%]</string>
+    <string name="text_unused">Nekorišteno</string>
+    <string name="text_used">Korišteno</string>
+    <string name="text_workedhours">Odrađeni sati</string>
+    <string name="text_workhours">Radni sati</string>
+    <string name="text_yes">Da</string>
+    <string name="workhours_title">Radni sati</string>
 </resources>

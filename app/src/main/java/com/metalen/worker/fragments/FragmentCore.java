@@ -215,15 +215,15 @@ public class FragmentCore extends Fragment {
         }
     }
 
-    protected void getSettingsForFilter(String DataType) {
+    protected void getSettingsForFilter(String DataType, String ACC_USER) {
         final SharedPreferences prefs = getActivity().getSharedPreferences("Worker", Context.MODE_PRIVATE);
-        _AutoFilter = prefs.getBoolean("FILTER_" + DataType + "_AutoFilter", true);
-        _SortingType = prefs.getString("FILTER_" + DataType + "_SortingType", "DESC");
-        _YearFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_YearFilterEnabled", false);
-        _MonthFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_MonthFilterEnabled", false);
-        _YearFilterValue = prefs.getInt("FILTER_" + DataType + "_YearFilterValue", 0);
-        _MonthFilterValue = prefs.getInt("FILTER_" + DataType + "_MonthFilterValue", 0);
-        _DisableFilter = prefs.getBoolean("FILTER_" + DataType + "_DisableFilter", false);
+        _AutoFilter = prefs.getBoolean("FILTER_" + DataType + "_" + ACC_USER + "_AutoFilter", true);
+        _SortingType = prefs.getString("FILTER_" + DataType + "_" + ACC_USER + "_SortingType", "DESC");
+        _YearFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_" + ACC_USER + "_YearFilterEnabled", false);
+        _MonthFilterEnabled = prefs.getBoolean("FILTER_" + DataType + "_" + ACC_USER + "_MonthFilterEnabled", false);
+        _YearFilterValue = prefs.getInt("FILTER_" + DataType + "_" + ACC_USER + "_YearFilterValue", 0);
+        _MonthFilterValue = prefs.getInt("FILTER_" + DataType + "_" + ACC_USER + "_MonthFilterValue", 0);
+        _DisableFilter = prefs.getBoolean("FILTER_" + DataType + "_" + ACC_USER + "_DisableFilter", false);
 
         if (_AutoFilter) setupAutoFilter();
 

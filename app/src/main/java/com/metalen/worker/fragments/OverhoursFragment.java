@@ -104,7 +104,7 @@ public class OverhoursFragment extends FragmentCore {
         }
 
         this.setHasOptionsMenu(true);
-        getSettingsForFilter(DataType);
+        getSettingsForFilter(DataType, ACC_USER);
 
         return fragmentView;
     }
@@ -656,7 +656,7 @@ public class OverhoursFragment extends FragmentCore {
         iCover.setImageDrawable(ACC_Cover);
 
         //GET SETTINGS
-        getSettingsForFilter(DataType);
+        getSettingsForFilter(DataType, ACC_USER);
         //getViews
         final CheckBox mAutoFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxAutoFilter);
         final CheckBox mYearFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxYearFilter);

@@ -43,6 +43,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
+                        android:animateLayoutChanges="true"
                         android:layout_weight="1" />
 
                     <TextView
@@ -50,6 +51,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
+                        android:animateLayoutChanges="true"
                         android:layout_weight="1" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -57,7 +59,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/primaryContentCardView3"
                 android:layout_width="fill_parent"
-                android:layout_height="240dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/primaryContentCardView1"
                 android:animateLayoutChanges="true"
                 android:clickable="true"
@@ -72,22 +74,22 @@
                     android:animateLayoutChanges="true"
                     android:orientation="horizontal">
 
-                        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                          android:id="@+id/calendar_view"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_gravity="center_vertical"
-                          android:layout_weight="1"
-                          android:animateLayoutChanges="true"
-                          android:background="@color/custom_background"
-                          android:nestedScrollingEnabled="true"
-                          android:paddingLeft="16dp"
-                          android:paddingRight="16dp"
-                          android:scrollbars="none"
-                          android:textFilterEnabled="true"
-                          app:mcv_weekDayTextAppearance="@style/TextAppearance.MaterialCalendarWidget.WeekDay"
-                            app:mcv_weekDayLabels="@array/custom_weekdays"
-                          app:mcv_showOtherDates="all" />
+                    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                        android:id="@+id/calendar_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:animateLayoutChanges="true"
+                        android:background="@color/custom_background"
+                        android:nestedScrollingEnabled="true"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:scrollbars="none"
+                        android:textFilterEnabled="true"
+                        app:mcv_weekDayTextAppearance="@style/TextAppearance.MaterialCalendarWidget.WeekDay"
+                        app:mcv_weekDayLabels="@array/custom_weekdays"
+                        app:mcv_showOtherDates="all" />
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -98,6 +100,7 @@
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
+                            android:animateLayoutChanges="true"
                             android:layout_height="wrap_content">
 
                             <EditText
@@ -109,14 +112,16 @@
                                 android:layout_weight="1"
                                 android:editable="false"
                                 android:focusable="false"
+                                android:visibility="gone"
+                                android:animateLayoutChanges="true"
                                 android:gravity="center"
                                 android:hint="Norm"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:visibility="gone" />
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
+                            android:animateLayoutChanges="true"
                             android:layout_height="wrap_content">
 
                             <EditText
@@ -127,15 +132,17 @@
                                 android:layout_marginRight="16dp"
                                 android:layout_weight="1"
                                 android:editable="false"
+                                android:animateLayoutChanges="true"
                                 android:focusable="false"
+                                android:visibility="gone"
                                 android:gravity="center"
                                 android:hint="Holidays"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:visibility="gone" />
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
+                            android:animateLayoutChanges="true"
                             android:layout_height="wrap_content">
 
                             <EditText
@@ -143,18 +150,20 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
+                                android:animateLayoutChanges="true"
                                 android:layout_marginRight="16dp"
                                 android:layout_weight="1"
                                 android:editable="false"
                                 android:focusable="false"
+                                android:visibility="gone"
                                 android:gravity="center"
                                 android:hint="Work hours"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:visibility="gone" />
+                                android:textAppearance="?android:attr/textAppearanceSmall"/>
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
+                            android:animateLayoutChanges="true"
                             android:layout_height="wrap_content">
 
                             <EditText
@@ -163,13 +172,56 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
+                                android:animateLayoutChanges="true"
+                                android:layout_weight="1"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:visibility="gone"
+                                android:gravity="center"
+                                android:hint="Overtime hours"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:animateLayoutChanges="true"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/home_et_5"
+                                android:layout_width="match_parent"
+                                android:animateLayoutChanges="true"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_weight="1"
+                                android:editable="false"
+                                android:visibility="gone"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:hint="Sick leave hours"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:animateLayoutChanges="true"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/home_et_6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:animateLayoutChanges="true"
                                 android:layout_weight="1"
                                 android:editable="false"
                                 android:focusable="false"
                                 android:gravity="center"
-                                android:hint="Overtime hours"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:visibility="gone" />
+                                android:hint="Intervention hours"
+                                android:visibility="gone"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>

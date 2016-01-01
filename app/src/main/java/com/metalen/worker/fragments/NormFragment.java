@@ -102,7 +102,7 @@ public class NormFragment extends FragmentCore {
             ACC_Cover = ((MainActivity) getActivity()).getUser(1).getBackground();
         }
 
-        getSettingsForFilter(DataType);
+        getSettingsForFilter(DataType, ACC_USER);
 
         return fragmentView;
     }
@@ -462,7 +462,7 @@ public class NormFragment extends FragmentCore {
         iCover.setImageDrawable(ACC_Cover);
 
         //GET SETTINGS
-        getSettingsForFilter(DataType);
+        getSettingsForFilter(DataType, ACC_USER);
         //getViews
         final CheckBox mAutoFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxAutoFilter);
         final CheckBox mYearFilter = (CheckBox) dialogView.findViewById(R.id.checkBoxYearFilter);

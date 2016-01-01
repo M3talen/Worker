@@ -2,6 +2,7 @@ package com.metalen.worker.adapters;
 
 import android.content.res.Resources;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,7 +104,13 @@ public class RecyclerViewAdapterNorm extends RecyclerViewAdapterCore{
             public void onPageScrollStateChanged(int state) {
             }
         });
+        ((CardView) holder.mView.findViewById(R.id.primaryContentCardView)).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                ((ViewPager) holder.mView).setCurrentItem(1, true);
+                return false;
+            }
+        });
     }
-
 
 }
