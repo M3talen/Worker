@@ -1,2 +1,2 @@
-include ':app', ':googleDateTimePicker'
+include ':app', ':googleDateTimePicker', ':MaterialNavigationDrawerModule'
 project(':googleDateTimePicker').projectDir = new File('googleDateTimePickers')

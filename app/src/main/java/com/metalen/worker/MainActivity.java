@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.WindowManager;
 import com.metalen.worker.fragments.*;
+import com.percolate.foam.FoamEvent;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
@@ -35,6 +36,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void onClick(MaterialSection section) {
         super.onClick(section);
+        new FoamEvent().track(this, "Opening" + section.getTitle());
     }
 
     @Override
@@ -77,6 +79,14 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_TO_FIRST);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        //Test code
+       /* View C = findViewById(R.id.C);
+        ViewGroup parent = (ViewGroup) C.getParent();
+        int index = parent.indexOfChild(C);
+        parent.removeView(C);
+        C = getLayoutInflater().inflate(optionId, parent, false);
+        parent.addView(C, index);*/
 
     }
 
