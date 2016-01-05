@@ -36,7 +36,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void onClick(MaterialSection section) {
         super.onClick(section);
-        new FoamEvent().track(this, "Opening" + section.getTitle());
+        new FoamEvent().track(this, "Opening " + section.getTitle());
     }
 
     @Override

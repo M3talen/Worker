@@ -1,5 +1,6 @@
 package com.metalen.worker.SQL;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.metalen.worker.classes.DataRecord;
+import com.percolate.foam.FoamEvent;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -30,9 +32,11 @@ public class SQLHandler extends SQLiteOpenHelper {
     private static final String KEY_DATA_2 = "DATA_2";
     private static final String KEY_DATA_3 = "DATA_3";
     private static final String KEY_DATA_4 = "DATA_4";
+    private Context mContext;
 
     public SQLHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mContext = context;
     }
 
     @Override
@@ -64,6 +68,7 @@ public class SQLHandler extends SQLiteOpenHelper {
         values.put(KEY_DATA_2, Record.getDATA_2());
         values.put(KEY_DATA_3, Record.getDATA_3());
         values.put(KEY_DATA_4, Record.getDATA_4());
+        new FoamEvent().track((Activity) mContext, "Adding record for " + Record.getTYPE());
         db.insert(TABLE_RECORDS, null, values);
         db.close();
     }
@@ -199,7 +204,7 @@ public class SQLHandler extends SQLiteOpenHelper {
         return Record;
     }
 
-    public List<DataRecord> getRecordsFiltered(String tType, String tSort, String tACC,  boolean _MonthFilterEnabled, int monthFilterValue, boolean _YearFilterEnabled, int yearFilterValue) {
+    public List<DataRecord> getRecordsFiltered(String tType, String tSort, String tACC, boolean _MonthFilterEnabled, int monthFilterValue, boolean _YearFilterEnabled, int yearFilterValue) {
         List<DataRecord> Record = new LinkedList<DataRecord>();
         String query = "";
         if (_MonthFilterEnabled)
@@ -269,12 +274,14 @@ public class SQLHandler extends SQLiteOpenHelper {
                 + tData_1 + "', DATA_2 = '" + tData_2 + "',DATA_3 = '" + tData_3 + "', DATA_4 = '" + tData_4 + "' WHERE ID = '" + ID + "'";
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(query);
+        new FoamEvent().track((Activity) mContext, "Updaing record for " + tType);
     }
 
     public void removeRecord(int id) {
         String query = " DELETE FROM " + TABLE_RECORDS + " WHERE ID = '" + id + "'";
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(query);
+        new FoamEvent().track((Activity) mContext, "Removing record");
         Log.d("Removing", "ID : " + id);
     }
 

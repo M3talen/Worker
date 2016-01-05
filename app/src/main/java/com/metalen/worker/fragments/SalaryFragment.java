@@ -16,10 +16,10 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-
 import com.metalen.worker.R;
 import com.metalen.worker.SQL.SQLHandler;
 import com.metalen.worker.classes.DataRecord;
+import com.percolate.foam.FoamEvent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -188,6 +188,7 @@ public class SalaryFragment extends FragmentCore {
                     .show();
 
         }
+        new FoamEvent().track(getActivity(), "Calculating salary");
     }
 
     public String getWorkedHours() {

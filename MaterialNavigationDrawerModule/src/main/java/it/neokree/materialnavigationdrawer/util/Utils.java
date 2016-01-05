@@ -1,35 +1,21 @@
 package it.neokree.materialnavigationdrawer.util;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.widget.ImageView;
 
 import java.util.Locale;
 
 /**
  * Class containing some static utility methods.
- *
+ * <p/>
  * Created by neokree on 06/01/15.
  */
 public class Utils {
@@ -44,9 +30,8 @@ public class Utils {
             } else {
                 return (int) (res.getDisplayMetrics().widthPixels - (56 * res.getDisplayMetrics().density));
             }
-        }
-        else { // for devices without smallestScreenWidthDp reference calculate if device screen is over 600 dp
-            if((res.getDisplayMetrics().widthPixels/res.getDisplayMetrics().density) >= 600 || res.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        } else { // for devices without smallestScreenWidthDp reference calculate if device screen is over 600 dp
+            if ((res.getDisplayMetrics().widthPixels / res.getDisplayMetrics().density) >= 600 || res.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
                 return (int) (320 * res.getDisplayMetrics().density);
             else
                 return (int) (res.getDisplayMetrics().widthPixels - (56 * res.getDisplayMetrics().density));
@@ -56,9 +41,8 @@ public class Utils {
     public static boolean isTablet(Resources res) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             return res.getConfiguration().smallestScreenWidthDp >= 600;
-        }
-        else { // for devices without smallestScreenWidthDp reference calculate if device screen is over 600
-            return (res.getDisplayMetrics().widthPixels/res.getDisplayMetrics().density) >= 600;
+        } else { // for devices without smallestScreenWidthDp reference calculate if device screen is over 600
+            return (res.getDisplayMetrics().widthPixels / res.getDisplayMetrics().density) >= 600;
 
         }
     }
@@ -79,7 +63,7 @@ public class Utils {
     public static Point getUserPhotoSize(Resources res) {
         int size = (int) (64 * res.getDisplayMetrics().density);
 
-        return new Point(size,size);
+        return new Point(size, size);
     }
 
     public static Point getBackgroundSize(Resources res) {
@@ -87,7 +71,7 @@ public class Utils {
 
         int height = (9 * width) / 16;
 
-        return new Point(width,height);
+        return new Point(width, height);
     }
 
     public static Bitmap getCroppedBitmapDrawable(Bitmap bitmap) {
@@ -112,7 +96,7 @@ public class Utils {
         return output;
     }
 
-    public static Bitmap resizeBitmapFromResource(Resources res, int resId,int reqWidth, int reqHeight) {
+    public static Bitmap resizeBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
 
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -127,9 +111,13 @@ public class Utils {
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
-    public static Bitmap resizeBitmap(Bitmap bitmap, int reqWidth,int reqHeight) {
-        return Bitmap.createScaledBitmap(bitmap,reqWidth,reqHeight,true);
-
+    public static Bitmap resizeBitmap(Bitmap bitmap, int reqWidth, int reqHeight) {
+        try {
+            return Bitmap.createScaledBitmap(bitmap, reqWidth, reqHeight, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static int calculateSize(
