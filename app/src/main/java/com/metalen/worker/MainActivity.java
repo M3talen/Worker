@@ -42,8 +42,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void init(Bundle savedInstanceState) {
 
-        account = new MaterialAccount(getResources(), "Edit account", "in settings", R.drawable.ic_launcher, R.drawable.bg2);
-        account2 = new MaterialAccount(getResources(), "", "", R.drawable.ic_launcher, R.drawable.bg2);
+        account = new MaterialAccount(this.getResources(), "Edit account", "in settings", R.drawable.ic_launcher, R.drawable.bg2);
+        account2 = new MaterialAccount(this.getResources(), "", "", R.drawable.ic_launcher, R.drawable.bg2);
         this.addAccount(account);
         this.addAccount(account2);
         this.setAccountListener(this);

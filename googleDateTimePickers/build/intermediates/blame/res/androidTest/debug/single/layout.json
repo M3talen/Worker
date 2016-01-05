@@ -8,12 +8,12 @@
         "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\bundles\\debug\\res\\layout\\date_picker_selected_date.xml"
     },
     {
-        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\time_header_label.xml",
-        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\bundles\\debug\\res\\layout\\time_header_label.xml"
-    },
-    {
         "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\date_picker_view_animator.xml",
         "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\bundles\\debug\\res\\layout\\date_picker_view_animator.xml"
+    },
+    {
+        "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\time_header_label.xml",
+        "source": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\bundles\\debug\\res\\layout\\time_header_label.xml"
     },
     {
         "merged": "C:\\Workspace\\Worker3\\googleDateTimePickers\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\date_picker_dialog.xml",

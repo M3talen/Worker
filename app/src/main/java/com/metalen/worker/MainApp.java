@@ -1,6 +1,8 @@
 package com.metalen.worker;
 
 import android.Manifest;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.multi.DialogOnAnyDeniedMultiplePermissionsListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
@@ -30,5 +32,11 @@ public class MainApp extends FoamApplication {
                         .withIcon(R.drawable.ic_launcher)
                         .build();
         Dexter.checkPermissions(dialogMultiplePermissionsListener, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }

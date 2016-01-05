@@ -46,7 +46,7 @@ public class MaterialAccount {
         this.resources = resources;
 
         // resize and caching bitmap
-        new ResizePhotoResource().execute(photo);
+        new ResizePhotoResourceCircular().execute(photo);
         if(background != null)
             new ResizeBackgroundBitmap().execute(background);
 
@@ -58,7 +58,7 @@ public class MaterialAccount {
         this.resources = resources;
 
         // resize and caching bitmap
-        new ResizePhotoResource().execute(photo);
+        new ResizePhotoResourceCircular().execute(photo);
         new ResizeBackgroundResource().execute(background);
     }
 
@@ -88,7 +88,7 @@ public class MaterialAccount {
     // setter
 
     public void setPhoto(int photo){
-        new ResizePhotoResource().execute(photo);
+        new ResizePhotoResourceCircular().execute(photo);
     }
 
     public void setPhoto(Bitmap photo) {
@@ -198,7 +198,7 @@ public class MaterialAccount {
 
     // asynctasks
 
-    private class ResizePhotoResource extends  AsyncTask<Integer, Void, BitmapDrawable> {
+    public class ResizePhotoResourceCircular extends  AsyncTask<Integer, Void, BitmapDrawable> {
 
         @Override
         protected BitmapDrawable doInBackground(Integer... params) {
@@ -219,7 +219,7 @@ public class MaterialAccount {
         }
     }
 
-    private class ResizePhotoBitmap extends AsyncTask<Bitmap, Void, BitmapDrawable> {
+    public class ResizePhotoBitmap extends AsyncTask<Bitmap, Void, BitmapDrawable> {
 
         @Override
         protected BitmapDrawable doInBackground(Bitmap... params) {
@@ -242,7 +242,7 @@ public class MaterialAccount {
         }
     }
 
-    private class ResizeBackgroundResource extends AsyncTask<Integer, Void, BitmapDrawable> {
+    public class ResizeBackgroundResource extends AsyncTask<Integer, Void, BitmapDrawable> {
         @Override
         protected BitmapDrawable doInBackground(Integer... params) {
             Point backSize = Utils.getBackgroundSize(resources);
@@ -261,7 +261,7 @@ public class MaterialAccount {
         }
     }
 
-    private class ResizeBackgroundBitmap extends AsyncTask<Bitmap, Void, BitmapDrawable> {
+    public class ResizeBackgroundBitmap extends AsyncTask<Bitmap, Void, BitmapDrawable> {
 
         @Override
         protected BitmapDrawable doInBackground(Bitmap... params) {
