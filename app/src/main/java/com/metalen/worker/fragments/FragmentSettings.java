@@ -61,7 +61,7 @@ public class FragmentSettings extends FragmentCore {
     TextView mTextUser1, mTextJob1, mTextUser2, mTextJob2, mTextNorma1, mTextNorma2;
     ImageView mIcon1, mIcon2;
     Button mEdit1, mEdit2, mBtNorma1;
-    MaterialAccount account, account1;
+    MaterialAccount account, account1, tAccount;
     AlertDialog dialog;
     ImageView dIcon, dCover;
     CardView normaCard;
@@ -338,6 +338,8 @@ public class FragmentSettings extends FragmentCore {
     protected void editDialog(final MaterialAccount accountx, final ImageView imx) {
         final View dialogView = View.inflate(getActivity(), R.layout.dialog_settings_useredit, null);
 
+        tAccount = accountx;
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogView)
                 .setCancelable(false);
@@ -365,6 +367,7 @@ public class FragmentSettings extends FragmentCore {
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, LOAD_IMAGE_RESULTS);
                 dIcon.setImageBitmap(((BitmapDrawable) accountx.getCircularPhoto()).getBitmap());
+                dCover.setBackground(new BitmapDrawable(getActivity().getResources(), ((BitmapDrawable) accountx.getBackground()).getBitmap()));
             }
         });
         dCover.setOnClickListener(new View.OnClickListener() {
@@ -378,6 +381,7 @@ public class FragmentSettings extends FragmentCore {
                         Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, LOAD_IMAGE_RESULTS);
+                dIcon.setImageBitmap(((BitmapDrawable) accountx.getCircularPhoto()).getBitmap());
                 dCover.setBackground(new BitmapDrawable(getActivity().getResources(), ((BitmapDrawable) accountx.getBackground()).getBitmap()));
             }
         });
@@ -524,6 +528,8 @@ public class FragmentSettings extends FragmentCore {
         }
         ((MainActivity) getActivity()).forceNotifyAccountChangeWithChange(dFileName);
         updateDisplayData();
+        dIcon.setImageBitmap(((BitmapDrawable) tAccount.getCircularPhoto()).getBitmap());
+        dCover.setBackground(new BitmapDrawable(getActivity().getResources(), ((BitmapDrawable) tAccount.getBackground()).getBitmap()));
     }
 
 
