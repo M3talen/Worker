@@ -17,13 +17,7 @@
     <string name="overtimehours_title">Overtime hours</string>
     <string name="salary_title">Salary</string>
     <string name="settings_title">Settings</string>
-    <string name="login_gp">Login with Google+</string>
-    <string name="gp_piis">Person information is null</string>
-    <string name="gp_singout">singing out</string>
-    <string name="gp_revoke">User is Revoked</string>
-    <string name="norm_status_import"><![CDATA[Norm status : <b>Found</b>]]></string>
-    <string name="database_bk_found"><![CDATA[Database backup : <b>Found</b>]]></string>
-    <string name="database_bk_notfound"><![CDATA[Database backup : <b>Not found</b>]]></string>
+
     <string name="settings_importing">Importing...</string>
     <string name="settings_import">Import</string>
     <string name="settings_import_text">Are you sure you want to import data from Norm ?</string>
@@ -36,25 +30,13 @@
     <string name="text_error">Error</string>
     <string name="text_needtocratebackup">You need to create a backup in Norm first</string>
     <string name="text_ok">Ok</string>
-    <string name="text_gp_logout">LOGOUT</string>
-    <string name="text_gp_login">LOGIN</string>
     <string name="text_deleting">Deleting</string>
     <string name="text_areyousure">Are you sure you want to delete the record ?</string>
     <string name="text_yes">Yes</string>
     <string name="text_no">No</string>
-    <string name="text_home_1"><![CDATA[Average norm : <b>%1$s</b><br>
-                                        Used holidays : <b>%2$s</b><br>
-                                        Worked hours : <b>%3$s</b><br>
-                                        Sick leave : <b>%4$s</b>]]></string>
-    <string name="text_home_2"><![CDATA[Overhours paid : <b>%1$s</b><br>
-                                        Overhours used : <b>%2$s</b><br>
-                                        Overhours unused : <b>%3$s</b><br>
-                                        Intervention hours : <b>%4$s</b>]]></string>
-    <string name="text_home_paid"><![CDATA[Paid (%1$s)<br>%2$s - %3$s]]></string>
-    <string name="text_home_used"><![CDATA[Used (%1$s)<br>%2$s - %3$s]]></string>
-    <string name="text_home_unused">Unused %1$s - %2$s</string>
+
     <string name="text_salary">Salary</string>
-    <string name="text_brutonetto">Bruto : %1$s €\nNeto : %2$s €</string>
+
     <string name="button_ok">Ok</string>
     <string name="text_used">Used</string>
     <string name="text_unused">Unused</string>
@@ -98,6 +80,27 @@
     <string name="filter_month">Month filter</string>
     <string name="filter_disable">Disable filter</string>
     <string name="filter_auto">Automatic filtering</string>
+    <string name="filtetr_text_year">Year</string>
+    <string name="filter_text_month">Month</string>
+    <string name="text_sickleavehours">Sick leave hours</string>
+    <string name="text_interventionhours">Intervention hours</string>
+    <string name="no_data">No data</string>
+    <string name="text_storage_perm">Storage permission</string>
+    <string name="text_storage_perm2">Storage permission are needed to allow personification</string>
+    <string name="text_acc_edit_1">Edit account</string>
+    <string name="text_acc_edit_2">in settings</string>
+    <string name="calendar_title">Calendar</string>
+    <string name="settings_norm_found"><![CDATA[Norm status : <b>Found</b>]]></string>
+    <string name="settings_db_bk_1"><![CDATA[Database backup : <b>Found</b>]]></string>
+    <string name="settings_db_bk_2"><![CDATA[Database backup : <b>Not found</b>]]></string>
+    <string name="text_home_1"><![CDATA[Average norm : <b>%1$s</b><br>Used holidays : <b>%2$s</b><br>Worked hours : <b>%3$s</b><br>Sick leave hours : <b>%4$s</b>]]></string>
+    <string name="text_home_2"><![CDATA[Overhours paid : <b>%1$s</b><br>Overhours used : <b>%2$s</b><br>Overhours unused : <b>%3$s</b><br>Intervention hours : <b>%4$s</b>]]></string>
+    <string name="salary_bruto_neto">Bruto : %1$s €\nNeto : %2$s €</string>
+    <string name="text_bruto_neto_2">Bruto : %1$s €\nNeto : %2$s €</string>
+    <string name="text_brutonetto">Bruto : %1$s €\nNeto : %2$s €</string>
+    <string name="test_home_paid"><![CDATA[Paid (%1$s)<br>%2$s - %3$s]]></string>
+    <string name="text_home_used"><![CDATA[Used (%1$s)<br>%2$s - %3$s]]></string>
+    <string name="text_home_unused">Unused %1$s - %2$s</string>
 
 
 </resources>

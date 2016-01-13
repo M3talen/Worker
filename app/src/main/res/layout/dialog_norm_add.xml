@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dialogNormView"
     android:layout_width="match_parent"
@@ -52,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:hint="Data"
+            android:hint="@string/text_data"
             android:inputType="numberDecimal"
             android:numeric="integer|decimal"
             android:layout_margin="10dp" />

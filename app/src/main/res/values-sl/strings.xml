@@ -15,8 +15,6 @@
     <string name="account_no2">Uporabnik 2</string>
     <string name="button_no">Ne</string>
     <string name="button_yes">Ja</string>
-    <string name="database_bk_found"><![CDATA[Varnosna kopija : <b>Obstaja</b>]]></string>
-    <string name="database_bk_notfound"><![CDATA[Varnosna kopija : <b>Ne obstaja</b>]]></string>
     <string name="filter_asc">Navzgor</string>
     <string name="filter_auto">Samodejno urejanje</string>
     <string name="filter_des">Navzdol</string>
@@ -24,16 +22,11 @@
     <string name="filter_month">Urejaj mesečno</string>
     <string name="filter_sorting">Razvrščanje</string>
     <string name="filter_year">Urejaj letno</string>
-    <string name="gp_piis">Ni informacij o uporabniku</string>
-    <string name="gp_revoke">Uporabnik je preklican</string>
-    <string name="gp_singout">Odjavi se</string>
     <string name="holidays_title">Dopust</string>
     <string name="home">Domov</string>
     <string name="interventions_title">Intervencije</string>
-    <string name="login_gp">Prijava s Google+</string>
     <string name="button_ok">Ok</string>
 
-    <string name="norm_status_import"><![CDATA[Norm status : <b>Najdeno</b>]]></string>
     <string name="norm_title">Norma</string>
     <string name="overtimehours_title">Nadurno delo</string>
                                                 <string name="salary_title">Plaća</string>
@@ -59,15 +52,9 @@
     <string name="text_endhour">Ura zaključka</string>
     <string name="text_error">Napaka</string>
     <string name="text_filter">Filter</string>
-    <string name="text_gp_login">PRIJAVA</string>
-    <string name="text_gp_logout">ODJAVA</string>
     <string name="text_hi">Zdrastveno zavarovanje [%]</string>
     <string name="text_holidays">Dopust</string>
-    <string name="text_home_1"><![CDATA[Povprečna norma : <b>%1$s</b><br>                                         Izkoriščeni dopust : <b>%2$s</b><br>                                         Odrađeni sati : <b>%3$s</b><br>                                         Bolovanja : <b>%4$s</b>]]></string>
-    <string name="text_home_paid"><![CDATA[Plačano (%1$s)<br>%2$s - %3$s]]></string>
-    <string name="text_home_2"><![CDATA[Plačane nadure : <b>%1$s</b><br>                                         Izkoriščene nadure  : <b>%2$s</b><br>                                         Neizkoriščene nadure : <b>%3$s</b><br>                                         Intervencije : <b>%4$s</b>]]></string>
     <string name="text_home_unused">Nekorišteno %1$s - %2$s</string>
-    <string name="text_home_used"><![CDATA[Korišteno (%1$s)<br>%2$s - %3$s]]></string>
     <string name="text_hours">Sati</string>
     <string name="text_import">Uvoz</string>
     <string name="text_job">Posao</string>
@@ -94,4 +81,23 @@
     <string name="text_workhours">Radni sati</string>
     <string name="text_yes">Da</string>
     <string name="workhours_title">Radni sati</string>
+    <string name="text_home_1"><![CDATA[Povprečna norma : <b>%1$s</b><br>Izkoriščeni dopust : <b>%2$s</b><br>Odrađeni sati : <b>%3$s</b><br>Bolovanja : <b>%4$s</b>]]></string>
+    <string name="calendar_title">Koledar</string>
+    <string name="filter_text_month">Mesec</string>
+    <string name="filtetr_text_year">Leto</string>
+    <string name="no_data">Ni podatkov</string>
+    <string name="salary_bruto_neto">Bruto : %1$s Eur\nNeto : %2$s Eur</string>
+    <string name="settings_db_bk_1"><![CDATA[Varnosna kopija : <b>Obstaja</b>]]></string>
+    <string name="settings_db_bk_2"><![CDATA[Varnosna kopija : <b>Ne obstaja</b>]]></string>
+    <string name="settings_norm_found"><![CDATA[Norm status : <b>Najdeno</b>]]></string>
+    <string name="text_acc_edit_1">Uredi uporabnika</string>
+    <string name="text_acc_edit_2"> v nastavitvah</string>
+    <string name="text_bruto_neto_2">Bruto : %1$s Eur\nNeto : %2$s Eur</string>
+    <string name="text_interventionhours">Intervencije</string>
+    <string name="text_sickleavehours">Bolovanje</string>
+    <string name="text_storage_perm">Dovoljenja za skladiščenje</string>
+    <string name="text_storage_perm2">Dovoljenja za skladiščenje so potrebna da se omogoči poosebljenje</string>
+    <string name="text_home_2"><![CDATA[Plačane nadure : <b>%1$s</b><br>Izkoriščene nadure : <b>%2$s</b><br>Neizkoriščene nadure : <b>%3$s</b><br>Intervencije : <b>%4$s</b>]]></string>
+    <string name="text_home_used"><![CDATA[Korišteno (%1$s)<br>%2$s - %3$s]]></string>
+    <string name="test_home_paid"><![CDATA[Plačano (%1$s)<br>%2$s - %3$s]]></string>
 </resources>

@@ -165,9 +165,9 @@ public class SalaryFragment extends FragmentCore {
             double tNeto = tBruto1 - p1 - p2 - p3;
 
             new AlertDialog.Builder(getActivity())
-                    .setTitle("Salary")
-                    .setMessage("Bruto : " + String.format("%.2f", tBruto1) + " €\nNeto : " + String.format("%.2f", tNeto) + " €")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setTitle(getString(R.string.text_salary))
+                    .setMessage(String.format(getString(R.string.salary_bruto_neto), String.format("%.2f", tBruto1), String.format("%.2f", tNeto)))
+                    .setPositiveButton(getString(R.string.text_ok), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     })
@@ -179,13 +179,13 @@ public class SalaryFragment extends FragmentCore {
             double tNeto = (tSalary - (tSalary * 0.25));
 
             new AlertDialog.Builder(getActivity())
-                    .setTitle("Salary")
-                    .setMessage("Bruto : " + String.format("%.2f", tBruto) + " €\nNeto : " + String.format("%.2f", tNeto) + " €")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setTitle(getString(R.string.text_salary))
+                    .setMessage(String.format(getString(R.string.text_bruto_neto_2), String.format("%.2f", tBruto), String.format("%.2f", tNeto)))
+                    .setPositiveButton(getString(R.string.text_ok), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     })
-                    .show();
+                            .show();
 
         }
         new FoamEvent().track(getActivity(), "Calculating salary");

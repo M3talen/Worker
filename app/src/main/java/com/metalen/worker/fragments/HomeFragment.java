@@ -114,13 +114,13 @@ public class HomeFragment extends FragmentCore {
         }, 300);
 
 
-        String stats1 = String.format("Average norm : <b>%s</b><br>Used holidays : <b>%s</b><br>Worked hours : <b>%s</b><br>Sick leave hours : <b>%s</b>",
+        String stats1 = String.format(this.getString(R.string.text_home_1),
                 String.format("%.2f", (float) getAverageNorm()),
                 String.format("%.2f", (float) getUsedHolidays()),
                 getWorkedHours(),
                 String.format("%.2f", (float) getSickLeaveHours()));
 
-        String stats2 = String.format("Overhours paid : <b>%s</b><br>Overhours used : <b>%s</b><br>Overhours unused : <b>%s</b><br>Intervention hours : <b>%s</b>",
+        String stats2 = String.format(this.getString(R.string.text_home_2),
                 getOverhours(DataRecord.OHMode.PAID.toString()),
                 getOverhours(DataRecord.OHMode.USED.toString()),
                 getOverhours(DataRecord.OHMode.UNUSED.toString()),
@@ -166,11 +166,11 @@ public class HomeFragment extends FragmentCore {
                 if (x.getTYPE().equals(DataRecord.Type.OVERHOURS.toString())) {
                     mOHStat.setVisibility(View.VISIBLE);
                     if (x.getDATA_3().equals(DataRecord.OHMode.PAID.toString()))
-                        mOHStat.setText(Html.fromHtml("Paid (" + x.getDATA_4() + ")<br>" + x.getDATA_1() + " - " + x.getDATA_2()));
+                        mOHStat.setText(Html.fromHtml(String.format(getString(R.string.test_home_paid), x.getDATA_4(), x.getDATA_1(), x.getDATA_2())));
                     if (x.getDATA_3().equals(DataRecord.OHMode.UNUSED.toString()))
-                        mOHStat.setText(Html.fromHtml("Used (" + x.getDATA_4() + ")<br>" + x.getDATA_1() + " - " + x.getDATA_2()));
+                        mOHStat.setText(Html.fromHtml(String.format(getString(R.string.text_home_used), x.getDATA_4(), x.getDATA_1(), x.getDATA_2())));
                     if (x.getDATA_3().equals(DataRecord.OHMode.USED.toString()))
-                        mOHStat.setText("Unused " + x.getDATA_1() + " - " + x.getDATA_2());
+                        mOHStat.setText(String.format(getString(R.string.text_home_unused), x.getDATA_1(), x.getDATA_2()));
                 }
                 if (x.getTYPE().equals(DataRecord.Type.SICKLEAVE.toString())) {
                     mSLStat.setVisibility(View.VISIBLE);

@@ -71,6 +71,7 @@ public class FragmentSettings extends FragmentCore {
     private AnimatedSvgView mAnimatedSvgView;
     private String dFileName = null;
     LoadToast mLoadToast;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_settings, container, false);
@@ -95,21 +96,20 @@ public class FragmentSettings extends FragmentCore {
 
         boolean dbFound = false;
 
-        if(isPackageInstalled("com.metalen.norm", getActivity())) {
+        if (isPackageInstalled("com.metalen.norm", getActivity())) {
             normaCard.setVisibility(View.VISIBLE);
-            mTextNorma1.setText(Html.fromHtml("Norm status : <b>Found</b>"));
+            mTextNorma1.setText(Html.fromHtml(this.getString(R.string.settings_norm_found)));
             File dbfile = null;
             try {
                 dbfile = new File(Environment.getExternalStorageDirectory().getPath() + "/Norm/SQLNorma");
                 if (dbfile.exists()) {
-                    mTextNorma2.setText(Html.fromHtml("Database backup : <b>Found</b>"));
-                    dbFound=true;
+                    mTextNorma2.setText(Html.fromHtml(this.getString(R.string.settings_db_bk_1)));
+                    dbFound = true;
+                } else {
+                    mTextNorma2.setText(Html.fromHtml(this.getString(R.string.settings_db_bk_2)));
+                    dbFound = false;
                 }
-                else {
-                    mTextNorma2.setText(Html.fromHtml("Database backup : <b>Not found</b>"));
-                    dbFound=false;
-                }
-            }catch (Exception e){e.printStackTrace();}
+            } catch (Exception e) {e.printStackTrace();}
         }
 
         final boolean finalDbFound = dbFound;
@@ -120,26 +120,26 @@ public class FragmentSettings extends FragmentCore {
                 mnHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if(finalDbFound) {
-                            mLoadToast.setText("Importing...");
+                        if (finalDbFound) {
+                            mLoadToast.setText(getString(R.string.settings_importing));
                             DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
                             mLoadToast.setTranslationY(Math.round(100 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)));
                             mLoadToast.show();
                             new AlertDialog.Builder(getActivity())
-                                    .setTitle("Import")
-                                    .setMessage("Are you sure you want to import data from Norm ?")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    .setTitle(getString(R.string.settings_import))
+                                    .setMessage(getString(R.string.settings_import_text))
+                                    .setPositiveButton(getString(R.string.text_yes), new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             new AlertDialog.Builder(getActivity())
-                                                    .setTitle("Account")
-                                                    .setMessage("Choose a account to import into")
-                                                    .setPositiveButton("Account 2", new DialogInterface.OnClickListener() {
+                                                    .setTitle(getString(R.string.text_account))
+                                                    .setMessage(getString(R.string.text_choseAccount))
+                                                    .setPositiveButton(getString(R.string.account_no2), new DialogInterface.OnClickListener() {
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             AccountNo = DataRecord.Account.ACC2.toString();
                                                             importDatabaseNorm();
                                                         }
                                                     })
-                                                    .setNegativeButton("Account 1", new DialogInterface.OnClickListener() {
+                                                    .setNegativeButton(getString(R.string.account_no1), new DialogInterface.OnClickListener() {
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             AccountNo = DataRecord.Account.ACC1.toString();
                                                             importDatabaseNorm();
@@ -148,17 +148,17 @@ public class FragmentSettings extends FragmentCore {
                                                     .show();
                                         }
                                     })
-                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    .setNegativeButton(getString(R.string.text_no), new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             mLoadToast.error();
                                         }
                                     })
                                     .show();
-                        }else {
+                        } else {
                             new AlertDialog.Builder(getActivity())
-                                    .setTitle("Error")
-                                    .setMessage("You need to create a backup in Norm first")
-                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    .setTitle(getString(R.string.text_error))
+                                    .setMessage(getString(R.string.text_needtocratebackup))
+                                    .setPositiveButton(getString(R.string.text_ok), new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
 
                                         }
@@ -219,24 +219,21 @@ public class FragmentSettings extends FragmentCore {
         return fragmentView;
     }
 
-    protected void importDatabaseNorm()
-    {
-        try{
+    protected void importDatabaseNorm() {
+        try {
             Log.d("Record", "Starting");
             File dbfile = new File(Environment.getExternalStorageDirectory().getPath() + "/Norm/SQLNorma");
-            Log.d("Record","File : " + dbfile.exists());
+            Log.d("Record", "File : " + dbfile.exists());
             SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dbfile, null);
-            Log.d("Record","DB : " + db.isOpen());
+            Log.d("Record", "DB : " + db.isOpen());
 
             ArrayList<DataRecord> mDataRecords = new ArrayList<>();
 
             String query = "SELECT * FROM Norma";
             Cursor cursor = db.rawQuery(query, null);
-            Log.d("Record","Starting read");
-            if (cursor.moveToFirst())
-            {
-                do
-                {
+            Log.d("Record", "Starting read");
+            if (cursor.moveToFirst()) {
+                do {
                     Log.d("Record", " Year: " + cursor.getString(1) +
                             " Month: " + cursor.getString(2) +
                             " Day: " + cursor.getString(3) +
@@ -250,47 +247,47 @@ public class FragmentSettings extends FragmentCore {
                             .append(pad(Integer.parseInt(cursor.getString(3))))
                             .append("/").append(pad(Integer.parseInt(cursor.getString(2))))
                             .append("/").append(cursor.getString(1)).toString());
-                    if(cursor.getString(4).equals("MODE_NORMA")) {
+                    if (cursor.getString(4).equals("MODE_NORMA")) {
                         mDataRecord.setTYPE(DataRecord.Type.NORMA.toString());
                         mDataRecord.setDATA_1(cursor.getString(5));
                     }
-                    if(cursor.getString(4).equals("MODE_DOPUST")) {
+                    if (cursor.getString(4).equals("MODE_DOPUST")) {
                         mDataRecord.setTYPE(DataRecord.Type.HOLIDAYS.toString());
                         String s = cursor.getString(5);
-                            mDataRecord.setDATA_1(s.indexOf(".") < 0 ? s : s.replaceAll("0*$", "").replaceAll("\\.$", ""));
+                        mDataRecord.setDATA_1(s.indexOf(".") < 0 ? s : s.replaceAll("0*$", "").replaceAll("\\.$", ""));
                     }
-                    if(cursor.getString(4).equals("MODE_WORKING_HOURS")) {
+                    if (cursor.getString(4).equals("MODE_WORKING_HOURS")) {
                         mDataRecord.setTYPE(DataRecord.Type.WORK_HOURS.toString());
                         mDataRecord.setDATA_1(cursor.getString(6));
                         mDataRecord.setDATA_2(cursor.getString(7));
                     }
-                    if(cursor.getString(4).equals("MODE_OVER_PAID")) {
+                    if (cursor.getString(4).equals("MODE_OVER_PAID")) {
                         mDataRecord.setTYPE(DataRecord.Type.OVERHOURS.toString());
                         String[] Data1 = cursor.getString(6).split(" - ");
                         mDataRecord.setDATA_1(Data1[0]);
                         mDataRecord.setDATA_2(Data1[1]);
                         mDataRecord.setDATA_3(DataRecord.OHMode.PAID.toString());
                         String[] Data2 = cursor.getString(7).replace(" ", "").split("/");
-                        if(!Data2[0].equals(""))
-                        mDataRecord.setDATA_4(new StringBuilder()
-                                .append(pad(Integer.parseInt(Data2[0])))
-                                .append("/").append(pad(Integer.parseInt(Data2[1])))
-                                .append("/").append(Data2[2]).toString());
+                        if (!Data2[0].equals(""))
+                            mDataRecord.setDATA_4(new StringBuilder()
+                                    .append(pad(Integer.parseInt(Data2[0])))
+                                    .append("/").append(pad(Integer.parseInt(Data2[1])))
+                                    .append("/").append(Data2[2]).toString());
                     }
-                    if(cursor.getString(4).equals("MODE_OVER_USED")) {
+                    if (cursor.getString(4).equals("MODE_OVER_USED")) {
                         mDataRecord.setTYPE(DataRecord.Type.OVERHOURS.toString());
                         String[] Data1 = cursor.getString(6).split(" - ");
                         mDataRecord.setDATA_1(Data1[0]);
                         mDataRecord.setDATA_2(Data1[1]);
                         mDataRecord.setDATA_3(DataRecord.OHMode.USED.toString());
                         String[] Data2 = cursor.getString(7).replace(" ", "").split("/");
-                        if(!Data2[0].equals(""))
-                        mDataRecord.setDATA_4(new StringBuilder()
-                                .append(pad(Integer.parseInt(Data2[0])))
-                                .append("/").append(pad(Integer.parseInt(Data2[1])))
-                                .append("/").append(Data2[2]).toString());
+                        if (!Data2[0].equals(""))
+                            mDataRecord.setDATA_4(new StringBuilder()
+                                    .append(pad(Integer.parseInt(Data2[0])))
+                                    .append("/").append(pad(Integer.parseInt(Data2[1])))
+                                    .append("/").append(Data2[2]).toString());
                     }
-                    if(cursor.getString(4).equals("MODE_OVER_UNUSED")) {
+                    if (cursor.getString(4).equals("MODE_OVER_UNUSED")) {
                         mDataRecord.setTYPE(DataRecord.Type.OVERHOURS.toString());
                         String[] Data1 = cursor.getString(6).split(" - ");
                         mDataRecord.setDATA_1(Data1[0]);
@@ -300,12 +297,15 @@ public class FragmentSettings extends FragmentCore {
                     mDataRecords.add(mDataRecord);
                 } while (cursor.moveToNext());
 
-                for(int i = 0; i < mDataRecords.size(); i++)
+                for (int i = 0; i < mDataRecords.size(); i++)
                     mainDB.addRecord(mDataRecords.get(i));
 
                 mLoadToast.success();
             }
-        }catch (Exception e){e.printStackTrace();mLoadToast.error();}
+        } catch (Exception e) {
+            e.printStackTrace();
+            mLoadToast.error();
+        }
     }
 
     protected void getAccountData() {
@@ -316,13 +316,13 @@ public class FragmentSettings extends FragmentCore {
         mTextJob1.setText(account.getSubTitle());
         try {
             mIcon1.setImageBitmap(((BitmapDrawable) account.getCircularPhoto()).getBitmap());
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {e.printStackTrace();}
 
         mTextUser2.setText(account1.getTitle());
         mTextJob2.setText(account1.getSubTitle());
-        try{
-        mIcon2.setImageBitmap(((BitmapDrawable) account1.getCircularPhoto()).getBitmap());
-        }catch (Exception e){e.printStackTrace();}
+        try {
+            mIcon2.setImageBitmap(((BitmapDrawable) account1.getCircularPhoto()).getBitmap());
+        } catch (Exception e) {e.printStackTrace();}
     }
 
     private boolean isPackageInstalled(String packagename, Context context) {
@@ -496,7 +496,7 @@ public class FragmentSettings extends FragmentCore {
                 final File mFile = new File(direct + "/" + dFileName + ".jpg");
 
                 try {
-                    if(!direct.exists())direct.mkdir();
+                    if (!direct.exists()) direct.mkdir();
                     out = new FileOutputStream(mFile);
                     decodedImage.compress(Bitmap.CompressFormat.JPEG, 90, out);
                 } catch (Exception e) {

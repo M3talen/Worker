@@ -42,22 +42,22 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void init(Bundle savedInstanceState) {
 
-        account = new MaterialAccount(this.getResources(), "Edit account", "in settings", R.drawable.ic_launcher, R.drawable.bg2);
+        account = new MaterialAccount(this.getResources(), getString(R.string.text_acc_edit_1), getString(R.string.text_acc_edit_2), R.drawable.ic_launcher, R.drawable.bg2);
         account2 = new MaterialAccount(this.getResources(), "", "", R.drawable.ic_launcher, R.drawable.bg2);
         this.addAccount(account);
         this.addAccount(account2);
         this.setAccountListener(this);
 
-        sHome = this.newSection("Home", this.getResources().getDrawable(R.drawable.ic_action_home), new HomeFragment());
-        sCalendar = this.newSection("Calendar", this.getResources().getDrawable(R.drawable.ic_action_calendar_month), new FragmentCalendar());
-        sIntervencije = this.newSection("Interventions", this.getResources().getDrawable(R.drawable.ic_alarm_black_24dp), new IntervencijeFragment());
-        sNorm = this.newSection("Norm", this.getResources().getDrawable(R.drawable.ic_action_calendar_month), new NormFragment());
-        sHolidays = this.newSection("Holidays", this.getResources().getDrawable(R.drawable.ic_action_calendar_day), new HolidaysFragment());
-        sWorkHours = this.newSection("Work hours", this.getResources().getDrawable(R.drawable.ic_av_timer_black_24dp), new WorkHoursFragment());
-        sOvertime = this.newSection("Overtime hours", this.getResources().getDrawable(R.drawable.ic_timelapse_black_24dp), new OverhoursFragment());
-        sSalary = this.newSection("Salary", this.getResources().getDrawable(R.drawable.ic_local_atm_black_24dp), new SalaryFragment());
-        sSettings = this.newSection("Settings", this.getResources().getDrawable(R.drawable.ic_settings_black_24dp), new FragmentSettings());
-        sSickLeave = this.newSection("Sick leave", this.getResources().getDrawable(R.drawable.ic_ambulance_black_24dp), new SickLeaveFragment());
+        sHome = this.newSection(getString(R.string.home), this.getResources().getDrawable(R.drawable.ic_action_home), new HomeFragment());
+        sCalendar = this.newSection(getString(R.string.calendar_title), this.getResources().getDrawable(R.drawable.ic_action_calendar_month), new FragmentCalendar());
+        sIntervencije = this.newSection(getString(R.string.interventions_title), this.getResources().getDrawable(R.drawable.ic_alarm_black_24dp), new IntervencijeFragment());
+        sNorm = this.newSection(getString(R.string.norm_title), this.getResources().getDrawable(R.drawable.ic_action_calendar_month), new NormFragment());
+        sHolidays = this.newSection(getString(R.string.holidays_title), this.getResources().getDrawable(R.drawable.ic_action_calendar_day), new HolidaysFragment());
+        sWorkHours = this.newSection(getString(R.string.workhours_title), this.getResources().getDrawable(R.drawable.ic_av_timer_black_24dp), new WorkHoursFragment());
+        sOvertime = this.newSection(getString(R.string.overtimehours_title), this.getResources().getDrawable(R.drawable.ic_timelapse_black_24dp), new OverhoursFragment());
+        sSalary = this.newSection(getString(R.string.salary_title), this.getResources().getDrawable(R.drawable.ic_local_atm_black_24dp), new SalaryFragment());
+        sSettings = this.newSection(getString(R.string.settings_title), this.getResources().getDrawable(R.drawable.ic_settings_black_24dp), new FragmentSettings());
+        sSickLeave = this.newSection(getString(R.string.text_sickleave_title), this.getResources().getDrawable(R.drawable.ic_ambulance_black_24dp), new SickLeaveFragment());
 
         this.addSection(sHome);
        // this.addSection(sCalendar);
@@ -137,8 +137,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     public void getProfileInformation() {
         try {
             SharedPreferences prefs2 = getSharedPreferences("Worker", MODE_PRIVATE);
-            account.setTitle(prefs2.getString("User0", "Edit account"));
-            account.setSubTitle(prefs2.getString("Job0", " in settings"));
+            account.setTitle(prefs2.getString("User0", getString(R.string.text_acc_edit_1)));
+            account.setSubTitle(prefs2.getString("Job0", getString(R.string.text_acc_edit_2)));
             account2.setTitle(prefs2.getString("User1", " "));
             account2.setSubTitle(prefs2.getString("Job1", " "));
 

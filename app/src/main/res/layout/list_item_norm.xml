@@ -75,7 +75,7 @@
             android:background="#EEEEEE"
             android:layout_margin="8dp"
             style="?android:attr/borderlessButtonStyle"
-            android:text="Edit" />
+            android:text="@string/text_card_edit" />
 
         <Button
             android:id="@+id/btn3"
@@ -84,7 +84,7 @@
             android:layout_margin="8dp"
             android:background="#EEEEEE"
             style="?android:attr/borderlessButtonStyle"
-            android:text="Delete" />
+            android:text="@string/text_card_delete" />
 
     </LinearLayout>
     <!--</LinearLayout>-->

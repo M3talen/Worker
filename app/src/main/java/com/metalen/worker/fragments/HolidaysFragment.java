@@ -71,7 +71,7 @@ public class HolidaysFragment extends FragmentCore {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mDataSet.clear();
         mAdapter = new RecyclerViewAdapterHolidays(mDataSet, HolidaysFragment.this);
-       // mRecyclerView.setItemAnimator(new ItemAnimator(mRecyclerView));
+        // mRecyclerView.setItemAnimator(new ItemAnimator(mRecyclerView));
         mRecyclerView.setAdapter(mAdapter);
 //
 
@@ -228,15 +228,15 @@ public class HolidaysFragment extends FragmentCore {
     public void ButtonDelete(int pos) {
         final int position = pos;
         new AlertDialog.Builder(getActivity())
-                .setTitle("Deleting")
-                .setMessage("Are you sure you want to delete the record ?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.text_deleting))
+                .setMessage(getString(R.string.text_areyousure))
+                .setPositiveButton(getString(R.string.text_yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         mDB.removeRecord(mDataSet.get(position).getID());
                         mAdapter.removeItem(position);
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(getString(R.string.text_no), null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
@@ -406,10 +406,10 @@ public class HolidaysFragment extends FragmentCore {
         final ArrayList<DataRecord> _Holidays = new ArrayList<>();
         try {
             List<DataRecord> Tab;
-            if(_DisableFilter)
+            if (_DisableFilter)
                 Tab = mDB.getRecordsByType(DataType, "DESC", ACC_USER);
             else
-                Tab = mDB.getRecordsFiltered(DataType, _SortingType, ACC_USER ,_MonthFilterEnabled , _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
+                Tab = mDB.getRecordsFiltered(DataType, _SortingType, ACC_USER, _MonthFilterEnabled, _MonthFilterValue, _YearFilterEnabled, _YearFilterValue);
             for (int i = 0; i < Tab.size(); ++i) {
                 DataRecord x = Tab.get(i);
                 _Holidays.add(x);
@@ -506,20 +506,20 @@ public class HolidaysFragment extends FragmentCore {
                     dialog.findViewById(R.id.dialogFilter).setVisibility(View.INVISIBLE);
                 }
 
-                if(_AutoFilter)
+                if (_AutoFilter)
                     setupAutoFilter();
                 //APPLY FILTER
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("Worker", getActivity().MODE_PRIVATE).edit();
-                editor.putBoolean("FILTER_" + DataType +  "_" + ACC_USER +"_AutoFilter", _AutoFilter);
-                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_YearFilterEnabled", _YearFilterEnabled);
-                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_MonthFilterEnabled", _MonthFilterEnabled);
-                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER +"_DisableFilter", _DisableFilter);
-                editor.putInt("FILTER_" + DataType + "_" + ACC_USER +"_YearFilterValue", _YearFilterValue);
-                editor.putInt("FILTER_" + DataType + "_" + ACC_USER +"_MonthFilterValue", _MonthFilterValue);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER + "_AutoFilter", _AutoFilter);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER + "_YearFilterEnabled", _YearFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER + "_MonthFilterEnabled", _MonthFilterEnabled);
+                editor.putBoolean("FILTER_" + DataType + "_" + ACC_USER + "_DisableFilter", _DisableFilter);
+                editor.putInt("FILTER_" + DataType + "_" + ACC_USER + "_YearFilterValue", _YearFilterValue);
+                editor.putInt("FILTER_" + DataType + "_" + ACC_USER + "_MonthFilterValue", _MonthFilterValue);
                 if (_SortingType.equals("DESC"))
-                    editor.putString("FILTER_" + DataType + "_" + ACC_USER +"_SortingType", "DESC");
+                    editor.putString("FILTER_" + DataType + "_" + ACC_USER + "_SortingType", "DESC");
                 else
-                    editor.putString("FILTER_" + DataType + "_" + ACC_USER +"_SortingType", "ASC");
+                    editor.putString("FILTER_" + DataType + "_" + ACC_USER + "_SortingType", "ASC");
                 editor.commit();
 
                 mDataSet.clear();
@@ -553,8 +553,7 @@ public class HolidaysFragment extends FragmentCore {
         dialog.show();
     }
 
-    protected void setDataType(String tType)
-    {
+    protected void setDataType(String tType) {
         DataType = tType;
     }
 

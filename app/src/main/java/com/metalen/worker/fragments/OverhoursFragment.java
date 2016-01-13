@@ -339,15 +339,15 @@ public class OverhoursFragment extends FragmentCore {
     public void ButtonDelete(int pos) {
         final int position = pos;
         new AlertDialog.Builder(getActivity())
-                .setTitle("Deleting")
-                .setMessage("Are you sure you want to delete the record ?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.text_deleting))
+                .setMessage(getString(R.string.text_areyousure))
+                .setPositiveButton(getString(R.string.text_yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         mDB.removeRecord(mDataSet.get(position).getID());
                         mAdapter.removeItem(position);
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(getString(R.string.text_no), null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }

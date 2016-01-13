@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
-                android:hint="Name"
+                android:hint="@string/text_name"
                 android:gravity="center" />
         </android.support.design.widget.TextInputLayout>
 
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
-                android:hint="Job"
+                android:hint="@string/text_job"
                 android:gravity="center" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>

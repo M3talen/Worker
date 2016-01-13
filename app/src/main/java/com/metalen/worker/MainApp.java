@@ -26,8 +26,8 @@ public class MainApp extends FoamApplication {
         MultiplePermissionsListener dialogMultiplePermissionsListener =
                 DialogOnAnyDeniedMultiplePermissionsListener.Builder
                         .withContext(this)
-                        .withTitle("Storage permission")
-                        .withMessage("Storage permission are needed to allow personification")
+                        .withTitle(R.string.text_storage_perm)
+                        .withMessage(R.string.text_storage_perm2)
                         .withButtonText(android.R.string.ok)
                         .withIcon(R.drawable.ic_launcher)
                         .build();

@@ -43,7 +43,7 @@
                 android:layout_margin="10dp"
                 android:focusable="false"
                 android:gravity="center"
-                android:hint="Date"
+                android:hint="@string/text_date"
                 android:textAlignment="center" />
         </android.support.design.widget.TextInputLayout>
 
@@ -65,7 +65,7 @@
                     android:layout_weight="1"
                     android:focusable="false"
                     android:gravity="center"
-                    android:hint="Start hour"
+                    android:hint="@string/text_starthour"
                     android:textAlignment="center" />
             </android.support.design.widget.TextInputLayout>
 
@@ -82,7 +82,7 @@
                     android:layout_weight="1"
                     android:focusable="false"
                     android:gravity="center"
-                    android:hint="End hour"
+                    android:hint="@string/text_endhour"
                     android:textAlignment="center" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Paid" />
+                android:text="@string/text_paid" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Unused" />
+                android:text="@string/text_unused" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:text="Used" />
+                android:text="@string/text_used" />
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -134,7 +134,7 @@
                 android:layout_margin="10dp"
                 android:focusable="false"
                 android:gravity="center"
-                android:hint="Date"
+                android:hint="@string/text_date"
                 android:textAlignment="center"
                 android:visibility="gone"/>
         </android.support.design.widget.TextInputLayout>

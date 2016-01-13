@@ -115,7 +115,7 @@
                                 android:visibility="gone"
                                 android:animateLayoutChanges="true"
                                 android:gravity="center"
-                                android:hint="Norm"
+                                android:hint="@string/text_norm"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -136,7 +136,7 @@
                                 android:focusable="false"
                                 android:visibility="gone"
                                 android:gravity="center"
-                                android:hint="Holidays"
+                                android:hint="@string/text_holidays"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -157,7 +157,7 @@
                                 android:focusable="false"
                                 android:visibility="gone"
                                 android:gravity="center"
-                                android:hint="Work hours"
+                                android:hint="@string/text_workhours"
                                 android:textAppearance="?android:attr/textAppearanceSmall"/>
                         </android.support.design.widget.TextInputLayout>
 
@@ -178,7 +178,7 @@
                                 android:focusable="false"
                                 android:visibility="gone"
                                 android:gravity="center"
-                                android:hint="Overtime hours"
+                                android:hint="@string/text_overhours"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -199,7 +199,7 @@
                                 android:visibility="gone"
                                 android:focusable="false"
                                 android:gravity="center"
-                                android:hint="Sick leave hours"
+                                android:hint="@string/text_sickleavehours"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -219,7 +219,7 @@
                                 android:editable="false"
                                 android:focusable="false"
                                 android:gravity="center"
-                                android:hint="Intervention hours"
+                                android:hint="@string/text_interventionhours"
                                 android:visibility="gone"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </android.support.design.widget.TextInputLayout>
@@ -246,7 +246,7 @@
                     android:layout_height="200dp"
                     android:animateLayoutChanges="true"
                     app:egCurveSmoothness="0.4"
-                    app:egEmptyDataText="No data"
+                    app:egEmptyDataText="@string/no_data"
                     app:egUseCubic="true"
                     app:egUseDynamicScaling="true"
                     app:egUseOverlapFill="false" />

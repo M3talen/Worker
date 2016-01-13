@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Advanced mode" />
+            android:text="@string/text_advmode" />
     </LinearLayout>
 
     <ScrollView
@@ -58,7 +58,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
-                            android:text="Payment per hour" />
+                            android:text="@string/text_pph" />
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                                 android:layout_gravity="right|center"
                                 android:layout_marginRight="16dp"
                                 android:gravity="center"
-                                android:hint="Payment per hour"
+                                android:hint="@string/text_pph"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -87,7 +87,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
-                            android:text="Worked hours" />
+                            android:text="@string/text_workhours" />
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
@@ -100,7 +100,7 @@
                                 android:layout_gravity="right|center"
                                 android:layout_marginRight="16dp"
                                 android:gravity="center"
-                                android:hint="Hours"
+                                android:hint="@string/text_hours"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -137,7 +137,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="Overtime hours" />
+                            android:text="@string/text_overhours" />
 
                     </LinearLayout>
 
@@ -161,7 +161,7 @@
                                 android:layout_marginTop="4dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="Hours"
+                                android:hint="@string/text_hours"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -182,7 +182,7 @@
                                 android:layout_marginTop="4dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="Payment per hour"
+                                android:hint="@string/text_pph"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -218,7 +218,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="Tax" />
+                            android:text="@string/text_tax" />
 
                     </LinearLayout>
 
@@ -242,7 +242,7 @@
                                 android:layout_marginTop="4dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="Pension insurance [%]"
+                                android:hint="@string/text_pi1"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -263,7 +263,7 @@
                                 android:layout_marginTop="4dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="Health insurance [%]"
+                                android:hint="@string/text_hi"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -290,7 +290,7 @@
                                 android:layout_marginTop="4dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="Tax (I) [%]"
+                                android:hint="@string/text_tax1"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -311,7 +311,7 @@
                                 android:layout_marginTop="4dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="Tax (II) [%]"
+                                android:hint="@string/text_tax2"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -332,7 +332,7 @@
                                 android:layout_marginTop="4dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:hint="Tax (III) [%]"
+                                android:hint="@string/text_tax3"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -369,7 +369,7 @@
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="Additions" />
+                            android:text="@string/text_additions" />
 
                     </LinearLayout>
 
@@ -382,7 +382,7 @@
                             android:layout_width="160dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
-                            android:text="Coefficient" />
+                            android:text="@string/text_coef" />
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
@@ -395,7 +395,7 @@
                                 android:layout_gravity="right|center"
                                 android:layout_marginRight="16dp"
                                 android:gravity="center"
-                                android:hint="Coefficient"
+                                android:hint="@string/text_coef2"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -411,7 +411,7 @@
                             android:layout_width="160dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
-                            android:text="Personal deduction" />
+                            android:text="@string/text_perded" />
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
@@ -424,7 +424,7 @@
                                 android:layout_gravity="right|center"
                                 android:layout_marginRight="16dp"
                                 android:gravity="center"
-                                android:hint="Deduction amount"
+                                android:hint="@string/text_dedamount"
                                 android:inputType="numberDecimal"
                                 android:numeric="integer|decimal"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />

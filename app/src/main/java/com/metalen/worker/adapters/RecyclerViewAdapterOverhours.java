@@ -78,13 +78,13 @@ public class RecyclerViewAdapterOverhours extends RecyclerViewAdapterCore {
         TextView tvType = (TextView) holder.mView.findViewById(R.id.txt2);
         TextView tvDate = (TextView) holder.mView.findViewById(R.id.txt4);
         if (mDataset.get(position).getDATA_3().equals(DataRecord.OHMode.USED.toString())) {
-            tvType.setText("Used");
+            tvType.setText(R.string.text_used);
             tvDate.setText(mDataset.get(position).getDATA_4());
         } else if (mDataset.get(position).getDATA_3().equals(DataRecord.OHMode.UNUSED.toString())) {
-            tvType.setText("Unused");
+            tvType.setText(R.string.text_unused);
             tvDate.setText("");
         } else if (mDataset.get(position).getDATA_3().equals(DataRecord.OHMode.PAID.toString())) {
-            tvType.setText("Paid");
+            tvType.setText(R.string.text_paid);
             tvDate.setText(mDataset.get(position).getDATA_4());
         }
 
