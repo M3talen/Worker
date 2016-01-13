@@ -229,7 +229,7 @@ public class SQLHandler extends SQLiteOpenHelper {
                     " CAST (substr(DATE, 4, 2) AS INTEGER) " + tSort + "," +
                     " CAST (substr(DATE, 1, 2) AS INTEGER) " + tSort + "";
 
-        if (_MonthFilterEnabled && _MonthFilterEnabled)
+        if (_YearFilterEnabled && _MonthFilterEnabled)
             query = "SELECT" +
                     " *" +
                     " FROM" +
