@@ -167,9 +167,9 @@ public class HomeFragment extends FragmentCore {
                     mOHStat.setVisibility(View.VISIBLE);
                     if (x.getDATA_3().equals(DataRecord.OHMode.PAID.toString()))
                         mOHStat.setText(Html.fromHtml(String.format(getString(R.string.test_home_paid), x.getDATA_4(), x.getDATA_1(), x.getDATA_2())));
-                    if (x.getDATA_3().equals(DataRecord.OHMode.UNUSED.toString()))
-                        mOHStat.setText(Html.fromHtml(String.format(getString(R.string.text_home_used), x.getDATA_4(), x.getDATA_1(), x.getDATA_2())));
                     if (x.getDATA_3().equals(DataRecord.OHMode.USED.toString()))
+                        mOHStat.setText(Html.fromHtml(String.format(getString(R.string.text_home_used), x.getDATA_4(), x.getDATA_1(), x.getDATA_2())));
+                    if (x.getDATA_3().equals(DataRecord.OHMode.UNUSED.toString()))
                         mOHStat.setText(String.format(getString(R.string.text_home_unused), x.getDATA_1(), x.getDATA_2()));
                 }
                 if (x.getTYPE().equals(DataRecord.Type.SICKLEAVE.toString())) {
