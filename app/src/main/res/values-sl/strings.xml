@@ -100,4 +100,9 @@
     <string name="text_home_2"><![CDATA[Plačane nadure : <b>%1$s</b><br>Izkoriščene nadure : <b>%2$s</b><br>Neizkoriščene nadure : <b>%3$s</b><br>Intervencije : <b>%4$s</b>]]></string>
     <string name="text_home_used"><![CDATA[Korišteno (%1$s)<br>%2$s - %3$s]]></string>
     <string name="test_home_paid"><![CDATA[Plačano (%1$s)<br>%2$s - %3$s]]></string>
+    <string name="settings_backup"> Varnostna kopija</string>
+    <string name="settings_export">Izvoz</string>
+    <string name="settings_exporting">Izvažam</string>
+    <string name="Backup_exists"><![CDATA[Varnosna kopija : <b>Obstaja</b>]]></string>
+    <string name="Backup_not_exists"><![CDATA[Varnosna kopija : <b>Ne obstaja</b>]]></string>
 </resources>

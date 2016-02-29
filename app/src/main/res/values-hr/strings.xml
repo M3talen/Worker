@@ -99,4 +99,9 @@
     <string name="text_home_2"><![CDATA[Plaćeni prekovremeni : <b>%1$s</b><br>Iskorišteni prekovremeni : <b>%2$s</b><br>Nekorišteni prekovremeni : <b>%3$s</b><br>Intervencije : <b>%4$s</b>]]></string>
     <string name="text_home_used"><![CDATA[Korišteno (%1$s)<br>%2$s - %3$s]]></string>
     <string name="test_home_paid"><![CDATA[Plaćeno (%1$s)<br>%2$s - %3$s]]></string>
+    <string name="settings_backup">Sigurnosna kopija</string>
+    <string name="settings_export">Izvoz</string>
+    <string name="settings_exporting">Izvozim</string>
+    <string name="Backup_exists"><![CDATA[Sigurnosna kopija : <b>Nađena</b>]]></string>
+    <string name="Backup_not_exists"><![CDATA[Sigurnosna kopija : <b>Nije nađena</b>]]></string>
 </resources>

@@ -279,6 +279,7 @@ public class HomeFragment extends FragmentCore {
 
         mChartNorm.addSeries(series);
         mChartNorm.addSeries(series2);
+        mChartNorm.setUseDynamicScaling(true);
         mChartNorm.startAnimation();
     }
 

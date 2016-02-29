@@ -101,6 +101,11 @@
     <string name="test_home_paid"><![CDATA[Paid (%1$s)<br>%2$s - %3$s]]></string>
     <string name="text_home_used"><![CDATA[Used (%1$s)<br>%2$s - %3$s]]></string>
     <string name="text_home_unused">Unused %1$s - %2$s</string>
+    <string name="settings_backup">Backup</string>
+    <string name="settings_export">Export</string>
+    <string name="settings_exporting">Exporting</string>
+    <string name="Backup_exists"><![CDATA[Backup : <b>Found</b>]]></string>
+    <string name="Backup_not_exists"><![CDATA[Backup : <b>Not found</b>]]></string>
 
 
 </resources>

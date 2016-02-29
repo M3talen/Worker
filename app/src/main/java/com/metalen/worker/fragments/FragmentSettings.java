@@ -47,6 +47,7 @@ import net.steamcrafted.loadtoast.LoadToast;
 import oak.svg.AnimatedSvgView;
 
 import java.io.*;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 /**
@@ -58,13 +59,13 @@ public class FragmentSettings extends FragmentCore {
 
     public static final int LOAD_IMAGE_RESULTS = 1;
     SignInButton gSignInButton;
-    TextView mTextUser1, mTextJob1, mTextUser2, mTextJob2, mTextNorma1, mTextNorma2;
+    TextView mTextUser1, mTextJob1, mTextUser2, mTextJob2, mTextNorma1, mTextNorma2, mTextBk;
     ImageView mIcon1, mIcon2;
-    Button mEdit1, mEdit2, mBtNorma1;
+    Button mEdit1, mEdit2, mBtNorma1, mBtbBk1, mBtbBk2;
     MaterialAccount account, account1, tAccount;
     AlertDialog dialog;
     ImageView dIcon, dCover;
-    CardView normaCard;
+    CardView normaCard, backupCard;
     SQLHandler mainDB;
     String AccountNo = DataRecord.Account.ACC1.toString();
 
@@ -90,11 +91,22 @@ public class FragmentSettings extends FragmentCore {
         mTextNorma2 = (TextView) fragmentView.findViewById(R.id.settings_norma_tv2);
         mBtNorma1 = (Button) fragmentView.findViewById(R.id.settings_norma_bt1);
 
+        backupCard = (CardView) fragmentView.findViewById(R.id.settings_CardView4);
+        mTextBk = (TextView) fragmentView.findViewById(R.id.settings_bk_tv2);
+        mBtbBk1 = (Button) fragmentView.findViewById(R.id.settings_bk_bt1);
+        mBtbBk2 = (Button) fragmentView.findViewById(R.id.settings_bk_bt2);
+
         mainDB = new SQLHandler(getActivity());
         mLoadToast = new LoadToast(getActivity());
         getAccountData();
 
         boolean dbFound = false;
+
+        String newFolder = "/Worker";
+        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+        File myNewFolder = new File(extStorageDirectory + newFolder);
+        if (!myNewFolder.exists())
+            myNewFolder.mkdir();
 
         if (isPackageInstalled("com.metalen.norm", getActivity())) {
             normaCard.setVisibility(View.VISIBLE);
@@ -170,6 +182,121 @@ public class FragmentSettings extends FragmentCore {
                 });
             }
         });
+
+
+        //BACKUP START
+
+        try {
+            File sd = Environment.getExternalStorageDirectory();
+            String backupDBPath = "/Worker/WorkerSQL.sqlite";
+            File currentDB = new File(sd, backupDBPath);
+            if (currentDB.exists())
+                mTextBk.setText(Html.fromHtml(this.getString(R.string.Backup_exists)));
+            else
+                mTextBk.setText(Html.fromHtml(this.getString(R.string.Backup_not_exists)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mBtbBk1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    File sd = Environment.getExternalStorageDirectory();
+                    File data = Environment.getDataDirectory();
+
+                    mLoadToast.setText(getString(R.string.settings_exporting));
+                    DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
+                    mLoadToast.setTranslationY(Math.round(100 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)));
+                    mLoadToast.show();
+
+                    if (sd.canWrite()) {
+                        String currentDBPath = "/data/com.metalen.worker/databases/WorkerSQL.sqlite";
+                        String backupDBPath = "/Worker/";
+                        File currentDB = new File(data, currentDBPath);
+                        File backupDB = new File(sd, backupDBPath);
+
+                        if (!backupDB.exists()) backupDB.mkdir();
+
+                        FileChannel src = new FileInputStream(currentDB).getChannel();
+                        FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                        dst.transferFrom(src, 0, src.size());
+                        src.close();
+                        dst.close();
+
+                        Handler x = new Handler();
+                        x.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mLoadToast.success();
+                                ((MainActivity) getActivity()).forceUpdateFragment();
+                            }
+                        }, 1000);
+                    }
+                } catch (Exception e) {
+
+                    Handler x = new Handler();
+                    x.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLoadToast.error();
+                        }
+                    }, 1000);
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        mBtbBk2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    File sd = Environment.getExternalStorageDirectory();
+                    File data = Environment.getDataDirectory();
+
+                    mLoadToast.setText(getString(R.string.settings_importing));
+                    DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
+                    mLoadToast.setTranslationY(Math.round(100 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)));
+                    mLoadToast.show();
+
+                    if (sd.canWrite()) {
+                        String currentDBPath = "/data/com.metalen.worker/databases/WorkerSQL.sqlite";
+                        String backupDBPath = "/Worker/WorkerSQL.sqlite";
+                        File backupDB = new File(data, currentDBPath);
+                        File currentDB = new File(sd, backupDBPath);
+
+                        FileChannel src = new FileInputStream(currentDB).getChannel();
+                        FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                        dst.transferFrom(src, 0, src.size());
+                        src.close();
+                        dst.close();
+
+                        Handler x = new Handler();
+                        x.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mLoadToast.success();
+                            }
+                        }, 1000);
+
+                    }
+                } catch (Exception e) {
+
+                    Handler x = new Handler();
+                    x.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLoadToast.error();
+                        }
+                    }, 1000);
+
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        //BACKUP END
+
 
         mAnimatedSvgView.setGlyphStrings(WorkerPathAnim.WORKER_PATH);
         mAnimatedSvgView.setFillPaints(
