@@ -105,8 +105,7 @@ public class FragmentSettings extends FragmentCore {
         String newFolder = "/Worker";
         String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
         File myNewFolder = new File(extStorageDirectory + newFolder);
-        if (!myNewFolder.exists())
-            myNewFolder.mkdir();
+        myNewFolder.mkdir();
 
         if (isPackageInstalled("com.metalen.norm", getActivity())) {
             normaCard.setVisibility(View.VISIBLE);
@@ -188,7 +187,7 @@ public class FragmentSettings extends FragmentCore {
 
         try {
             File sd = Environment.getExternalStorageDirectory();
-            String backupDBPath = "/Worker/WorkerSQL.sqlite";
+            String backupDBPath = "/Worker/WorkerSQL";
             File currentDB = new File(sd, backupDBPath);
             if (currentDB.exists())
                 mTextBk.setText(Html.fromHtml(this.getString(R.string.Backup_exists)));
@@ -211,12 +210,10 @@ public class FragmentSettings extends FragmentCore {
                     mLoadToast.show();
 
                     if (sd.canWrite()) {
-                        String currentDBPath = "/data/com.metalen.worker/databases/WorkerSQL.sqlite";
-                        String backupDBPath = "/Worker/";
+                        String currentDBPath = "/data/com.metalen.worker/databases/WorkerSQL";
+                        String backupDBPath = "/Worker/WorkerSQL";
                         File currentDB = new File(data, currentDBPath);
                         File backupDB = new File(sd, backupDBPath);
-
-                        if (!backupDB.exists()) backupDB.mkdir();
 
                         FileChannel src = new FileInputStream(currentDB).getChannel();
                         FileChannel dst = new FileOutputStream(backupDB).getChannel();
@@ -260,8 +257,8 @@ public class FragmentSettings extends FragmentCore {
                     mLoadToast.show();
 
                     if (sd.canWrite()) {
-                        String currentDBPath = "/data/com.metalen.worker/databases/WorkerSQL.sqlite";
-                        String backupDBPath = "/Worker/WorkerSQL.sqlite";
+                        String currentDBPath = "/data/com.metalen.worker/databases/WorkerSQL";
+                        String backupDBPath = "/Worker/WorkerSQL";
                         File backupDB = new File(data, currentDBPath);
                         File currentDB = new File(sd, backupDBPath);
 
@@ -615,7 +612,7 @@ public class FragmentSettings extends FragmentCore {
 
                 Bitmap decodedImage = BitmapFactory.decodeStream(ImageStream, null, options);
 
-                FileOutputStream out = null;
+                OutputStream out = null;
 
                 final File direct = new File(Environment.getExternalStorageDirectory()
                         + "/Worker");
