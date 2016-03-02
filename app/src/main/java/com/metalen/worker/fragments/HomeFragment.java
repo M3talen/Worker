@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.util.Log;
 import android.view.*;
@@ -19,11 +21,13 @@ import android.widget.*;
 import com.metalen.worker.MainActivity;
 import com.metalen.worker.R;
 import com.metalen.worker.SQL.SQLHandler;
+import com.metalen.worker.animator.WorkerPathAnim;
 import com.metalen.worker.classes.DataRecord;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
+import oak.svg.AnimatedSvgView;
 import org.eazegraph.lib.charts.ValueLineChart;
 import org.eazegraph.lib.models.ValueLinePoint;
 import org.eazegraph.lib.models.ValueLineSeries;
@@ -49,6 +53,9 @@ public class HomeFragment extends FragmentCore {
     ArrayList<DataRecord> _WorkHours = null;
     ArrayList<DataRecord> _SickLave = null;
     ArrayList<DataRecord> _InterventionHours = null;
+    CardView mChartViewCard, mSVGCardView;
+    AnimatedSvgView mSVGAnimView;
+
 
     String DataType = "HOME";
 
@@ -63,6 +70,9 @@ public class HomeFragment extends FragmentCore {
         mChartNorm = (ValueLineChart) fragmentView.findViewById(R.id.home_chart_norm);
         mStat1 = (TextView) fragmentView.findViewById(R.id.home_textView_1);
         mStat2 = (TextView) fragmentView.findViewById(R.id.home_textView_2);
+        mChartViewCard = (CardView) fragmentView.findViewById(R.id.primaryContentCardView2);
+        mSVGCardView = (CardView) fragmentView.findViewById(R.id.primaryContentCardView4);
+        mSVGAnimView = (AnimatedSvgView) fragmentView.findViewById(R.id.animated_svg_view_home);
 
         mNormStat = (TextView) fragmentView.findViewById(R.id.home_et_1);
         mHolidayStat = (TextView) fragmentView.findViewById(R.id.home_et_2);
@@ -281,6 +291,37 @@ public class HomeFragment extends FragmentCore {
         mChartNorm.addSeries(series2);
         mChartNorm.setUseDynamicScaling(true);
         mChartNorm.startAnimation();
+        if(series2.getSeries().isEmpty() && series.getSeries().isEmpty()){
+            mChartViewCard.setVisibility(View.GONE);
+            StartAnimationWorker();
+        }
+    }
+
+    private void StartAnimationWorker() {
+        mSVGCardView.setVisibility(View.VISIBLE);
+        mSVGAnimView.setGlyphStrings(WorkerPathAnim.WORKER_PATH);
+        mSVGAnimView.setFillPaints(
+                new int[]{255, 255},
+                new int[]{254, 40},
+                new int[]{254, 40},
+                new int[]{113, 40});
+        int traceColor = Color.argb(255, 0, 0, 0);
+        int[] traceColors = new int[2];
+        int residueColor = Color.argb(50, 0, 0, 0);
+        int[] residueColors = new int[2];
+        for (int i = 0; i < traceColors.length; i++) {
+            traceColors[i] = traceColor;
+            residueColors[i] = residueColor;
+        }
+        mSVGAnimView.setTraceColors(traceColors);
+        mSVGAnimView.setTraceResidueColors(residueColors);
+
+        mSVGAnimView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSVGAnimView.start();
+            }
+        }, 1000);
     }
 
 

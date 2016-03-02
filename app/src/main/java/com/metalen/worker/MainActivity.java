@@ -1,5 +1,7 @@
 package com.metalen.worker;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -15,8 +17,11 @@ import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountListener;
+import za.co.riggaroo.materialhelptutorial.TutorialItem;
+import za.co.riggaroo.materialhelptutorial.tutorial.MaterialTutorialActivity;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
 public class MainActivity extends MaterialNavigationDrawer implements MaterialAccountListener {
@@ -26,6 +31,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     public boolean mSignInClicked;
     MaterialAccount account, account2;
     MaterialSection sHome, sNorm, sHolidays, sWorkHours, sOvertime, sSalary, sSettings, sCalendar, sIntervencije, sSickLeave;
+
+    private static final int REQUEST_CODE = 5623;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         sSickLeave = this.newSection(getString(R.string.text_sickleave_title), this.getResources().getDrawable(R.drawable.ic_ambulance_black_24dp), new SickLeaveFragment());
 
         this.addSection(sHome);
-       // this.addSection(sCalendar);
+        // this.addSection(sCalendar);
         this.addDivisor();
         this.addSection(sNorm);
         this.addSection(sWorkHours);
@@ -80,6 +87,9 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        SharedPreferences prefs = getSharedPreferences("Worker", MODE_PRIVATE);
+        if(prefs.getBoolean("Intro", false) == false)
+            loadTutorial();
         //Test code
        /* View C = findViewById(R.id.C);
         ViewGroup parent = (ViewGroup) C.getParent();
@@ -89,6 +99,59 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         parent.addView(C, index);*/
 
     }
+
+    //TUTORIAL
+
+
+    public void loadTutorial() {
+        Intent mainAct = new Intent(this, MaterialTutorialActivity.class);
+        mainAct.putParcelableArrayListExtra(MaterialTutorialActivity.MATERIAL_TUTORIAL_ARG_TUTORIAL_ITEMS, getTutorialItems(this));
+        startActivityForResult(mainAct, REQUEST_CODE);
+
+        SharedPreferences.Editor editor = getSharedPreferences("Worker", MODE_PRIVATE).edit();
+            editor.putBoolean("Intro", true);
+        editor.commit();
+    }
+
+    private ArrayList<TutorialItem> getTutorialItems(Context context) {
+
+        TutorialItem tutorialItem1 = new TutorialItem(
+                context.getString(R.string.slide_1),
+                context.getString(R.string.slide_1_subtitle),
+                R.color.slide1,
+                R.drawable.tut_page_1_front,
+                R.drawable.tut_page_1_back);
+
+        TutorialItem tutorialItem2 = new TutorialItem(
+                context.getString(R.string.slide_2),
+                context.getString(R.string.slide_2_subtitle),
+                R.color.slide2,
+                R.drawable.tut_page_2_front,
+                R.drawable.tut_page_2_back);
+
+        TutorialItem tutorialItem3 = new TutorialItem(
+                context.getString(R.string.slide_3),
+                context.getString(R.string.slide_3_subtitle),
+                R.color.slide3,
+                R.drawable.tut_page_3_front,
+                R.drawable.tut_page_3_back);
+
+
+        ArrayList<TutorialItem> tutorialItems = new ArrayList<>();
+        tutorialItems.add(tutorialItem1);
+        tutorialItems.add(tutorialItem2);
+        tutorialItems.add(tutorialItem3);
+
+        return tutorialItems;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    //TUTORAIL END
+
 
     @Override
     public void onAccountOpening(MaterialAccount materialAccount) {
@@ -143,14 +206,14 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
             account2.setSubTitle(prefs2.getString("Job1", " "));
 
             notifyAccountDataChanged();
-            if(prefs2.getString("Icon0", " ").equals("1"))
+            if (prefs2.getString("Icon0", " ").equals("1"))
                 new LoadImage(true, 0).execute("user");
-            if(prefs2.getString("Cover0", " ").equals("1"))
+            if (prefs2.getString("Cover0", " ").equals("1"))
                 new LoadImage(false, 0).execute("cover");
 
-            if(prefs2.getString("Icon1", " ").equals("1"))
+            if (prefs2.getString("Icon1", " ").equals("1"))
                 new LoadImage(true, 1).execute("user2");
-            if(prefs2.getString("Cover1", " ").equals("1"))
+            if (prefs2.getString("Cover1", " ").equals("1"))
                 new LoadImage(false, 1).execute("cover2");
 
         } catch (Exception e) {

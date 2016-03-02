@@ -43,16 +43,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
-                        android:animateLayoutChanges="true"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:animateLayoutChanges="true" />
 
                     <TextView
                         android:id="@+id/home_textView_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
-                        android:animateLayoutChanges="true"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:animateLayoutChanges="true" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -87,9 +87,9 @@
                         android:paddingRight="16dp"
                         android:scrollbars="none"
                         android:textFilterEnabled="true"
-                        app:mcv_weekDayTextAppearance="@style/TextAppearance.MaterialCalendarWidget.WeekDay"
+                        app:mcv_showOtherDates="all"
                         app:mcv_weekDayLabels="@array/custom_weekdays"
-                        app:mcv_showOtherDates="all" />
+                        app:mcv_weekDayTextAppearance="@style/TextAppearance.MaterialCalendarWidget.WeekDay" />
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -100,8 +100,8 @@
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:animateLayoutChanges="true"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true">
 
                             <EditText
                                 android:id="@+id/home_et_1"
@@ -110,19 +110,19 @@
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
                                 android:layout_weight="1"
+                                android:animateLayoutChanges="true"
                                 android:editable="false"
                                 android:focusable="false"
-                                android:visibility="gone"
-                                android:animateLayoutChanges="true"
                                 android:gravity="center"
                                 android:hint="@string/text_norm"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:animateLayoutChanges="true"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true">
 
                             <EditText
                                 android:id="@+id/home_et_2"
@@ -131,40 +131,40 @@
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
                                 android:layout_weight="1"
-                                android:editable="false"
                                 android:animateLayoutChanges="true"
+                                android:editable="false"
                                 android:focusable="false"
-                                android:visibility="gone"
                                 android:gravity="center"
                                 android:hint="@string/text_holidays"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:animateLayoutChanges="true"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true">
 
                             <EditText
                                 android:id="@+id/home_et_3"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
-                                android:animateLayoutChanges="true"
                                 android:layout_marginRight="16dp"
                                 android:layout_weight="1"
+                                android:animateLayoutChanges="true"
                                 android:editable="false"
                                 android:focusable="false"
-                                android:visibility="gone"
                                 android:gravity="center"
                                 android:hint="@string/text_workhours"
-                                android:textAppearance="?android:attr/textAppearanceSmall"/>
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:animateLayoutChanges="true"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true">
 
                             <EditText
                                 android:id="@+id/home_et_4"
@@ -172,41 +172,41 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
-                                android:animateLayoutChanges="true"
                                 android:layout_weight="1"
+                                android:animateLayoutChanges="true"
                                 android:editable="false"
                                 android:focusable="false"
-                                android:visibility="gone"
                                 android:gravity="center"
                                 android:hint="@string/text_overhours"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:animateLayoutChanges="true"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true">
 
                             <EditText
                                 android:id="@+id/home_et_5"
                                 android:layout_width="match_parent"
-                                android:animateLayoutChanges="true"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
                                 android:layout_weight="1"
+                                android:animateLayoutChanges="true"
                                 android:editable="false"
-                                android:visibility="gone"
                                 android:focusable="false"
                                 android:gravity="center"
                                 android:hint="@string/text_sickleavehours"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:animateLayoutChanges="true"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:animateLayoutChanges="true">
 
                             <EditText
                                 android:id="@+id/home_et_6"
@@ -214,14 +214,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
-                                android:animateLayoutChanges="true"
                                 android:layout_weight="1"
+                                android:animateLayoutChanges="true"
                                 android:editable="false"
                                 android:focusable="false"
                                 android:gravity="center"
                                 android:hint="@string/text_interventionhours"
-                                android:visibility="gone"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:visibility="gone" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -253,7 +253,32 @@
 
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/primaryContentCardView4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/primaryContentCardView2"
+                android:animateLayoutChanges="true"
+                android:clickable="true"
+                android:visibility="gone"
+                android:focusable="true"
+                android:stateListAnimator="@anim/raise"
+                materialdesign:cardUseCompatPadding="true">
 
+                <oak.svg.AnimatedSvgView
+                    android:id="@+id/animated_svg_view_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:gravity="bottom"
+                    materialdesign:oakSvgFillStart="1300"
+                    materialdesign:oakSvgFillTime="1000"
+                    materialdesign:oakSvgImageSizeX="1000"
+                    materialdesign:oakSvgImageSizeY="1000"
+                    materialdesign:oakSvgTraceTime="2000"
+                    materialdesign:oakSvgTraceTimePerGlyph="1000" />
+            </android.support.v7.widget.CardView>
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

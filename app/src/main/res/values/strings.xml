@@ -106,6 +106,12 @@
     <string name="settings_exporting">Exporting</string>
     <string name="Backup_exists"><![CDATA[Backup : <b>Found</b>]]></string>
     <string name="Backup_not_exists"><![CDATA[Backup : <b>Not found</b>]]></string>
+    <string name="slide_1">Tracking</string>
+    <string name="slide_1_subtitle">Are you just tired of tracking all your work related parameters ?</string>
+    <string name="slide_2">Simple</string>
+    <string name="slide_2_subtitle">Wouldn\'t it be amazing if you could do all that on your phone ?</string>
+    <string name="slide_3">Worker</string>
+    <string name="slide_3_subtitle">Well, now you can. Welcome to Worker !</string>
 
 
 </resources>

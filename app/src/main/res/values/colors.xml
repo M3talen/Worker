@@ -13,9 +13,13 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
 
+    <color name="slide1">#4f91ff</color>
+    <color name="slide2">#5ab55d</color>
+    <color name="slide3">#607D8B</color>
+
     <color name="custom_header_text">#212121</color>
     <color name="custom_selected">#607D8B</color>
-    <color name="custom_background">#FAFAFA</color>
+    <color name="custom_background">#00000000</color>
     <color name="custom_background_today">#CFD8DC</color>
     <color name="custom_background_disabled">#B6B6B6</color>
     <color name="custom_text_selected">#FAFAFA</color>
