@@ -104,5 +104,10 @@
     <string name="settings_exporting">Izvozim</string>
     <string name="Backup_exists"><![CDATA[Sigurnosna kopija : <b>Nađena</b>]]></string>
     <string name="Backup_not_exists"><![CDATA[Sigurnosna kopija : <b>Nije nađena</b>]]></string>
-    <string name="slide_1"></string>
+    <string name="slide_1">Praćenje</string>
+    <string name="slide_3">Worker</string>
+    <string name="slide_1_subtitle">Jeste li umorni od praćenja svih parametra vezanih uz posao ?</string>
+    <string name="slide_2">Jednostavno</string>
+    <string name="slide_2_subtitle"> Zar ne bi bilo iznenađujuće ako bi mogao učiniti sve to na telefonu?</string>
+    <string name="slide_3_subtitle">Pa, sada možete. Dobro došli u Worker !</string>
 </resources>

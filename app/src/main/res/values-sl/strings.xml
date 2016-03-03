@@ -105,4 +105,10 @@
     <string name="settings_exporting">Izvažam</string>
     <string name="Backup_exists"><![CDATA[Varnosna kopija : <b>Obstaja</b>]]></string>
     <string name="Backup_not_exists"><![CDATA[Varnosna kopija : <b>Ne obstaja</b>]]></string>
+    <string name="slide_1_subtitle"> Ali ste utrujeni od sledenja vseh parametri povezanimi z delom ?</string>
+    <string name="slide_2">Enostavno</string>
+    <string name="slide_2_subtitle"> Ali ne bi bilo čudovito če bi lahko naredil vse to na telefonu ?</string>
+    <string name="slide_3">Worker</string>
+    <string name="slide_3_subtitle">No, zdaj lahko. Dobrodošli v Worker !</string>
+    <string name="slide_1">Sledenje</string>
 </resources>
