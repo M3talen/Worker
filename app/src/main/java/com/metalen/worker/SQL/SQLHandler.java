@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.metalen.worker.classes.DataRecord;
 import com.percolate.foam.FoamEvent;
 
@@ -101,6 +103,9 @@ public class SQLHandler extends SQLiteOpenHelper {
         }
 
         Log.d("Getting all records", Record.toString());
+
+
+
         return Record;
     }
 
@@ -137,8 +142,54 @@ public class SQLHandler extends SQLiteOpenHelper {
         }
 
         Log.d("Getting all records", Record.toString());
+
+        //TestFireBase
+     /*  FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.setLogLevel(Logger.Level.DEBUG);
+        DatabaseReference myRef = database.getReference(Handler.getUniquePhoneIdentity());*/
+
+        FireBaseHandler Handler = new FireBaseHandler();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(Handler.getUniquePhoneIdentity()).child(tACC.toLowerCase()).child(tType.toLowerCase()).setValue(Record);
+
         return Record;
     }
+
+    public void backupAllRecords() {
+        List<DataRecord> Record = new LinkedList<DataRecord>();
+        String query = "SELECT * FROM " + TABLE_RECORDS + "";
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        DataRecord mList = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                mList = new DataRecord();
+                mList.setID(Integer.parseInt(cursor.getString(0)));
+                mList.setACC(cursor.getString(1));
+                mList.setTYPE(cursor.getString(2));
+                mList.setDATE(cursor.getString(3));
+                mList.setDATA_1(cursor.getString(4));
+                mList.setDATA_2(cursor.getString(5));
+                mList.setDATA_3(cursor.getString(6));
+                mList.setDATA_4(cursor.getString(7));
+                Record.add(mList);
+
+            } while (cursor.moveToNext());
+
+        }
+
+        //TestFireBase
+     /*  FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.setLogLevel(Logger.Level.DEBUG);
+        DatabaseReference myRef = database.getReference(Handler.getUniquePhoneIdentity());*/
+
+        /*FireBaseHandler Handler = new FireBaseHandler();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(Handler.getUniquePhoneIdentity()).child("DataBaseBackup").setValue(Record);*/
+    }
+
 
     public List<DataRecord> getRecordsByYear(String tYear, String tACC) {
         List<DataRecord> Record = new LinkedList<DataRecord>();
@@ -315,4 +366,6 @@ public class SQLHandler extends SQLiteOpenHelper {
         Log.d("Getting all records", Record.toString());
         return Record;
     }
+
+
 }

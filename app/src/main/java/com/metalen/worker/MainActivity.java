@@ -53,7 +53,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     @Override
     public void init(Bundle savedInstanceState) {
 
-       // Firebase.setAndroidContext(this);
+        //mDB = new SQLHandler(this);
 
         account = new MaterialAccount(this.getResources(), getString(R.string.text_acc_edit_1), getString(R.string.text_acc_edit_2), R.drawable.ic_launcher, R.drawable.bg2);
         account2 = new MaterialAccount(this.getResources(), "", "", R.drawable.ic_launcher, R.drawable.bg2);
@@ -100,6 +100,7 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         //mFirebaseRef = new Firebase("https://workerapp.firebaseio.com/");
        //
        //mFirebaseRef.child("App").setValue(mDB.getAll().get(0).getID());
+        //mDB.backupAllRecords();
 }
 
     //TUTORIAL
