@@ -295,12 +295,12 @@ public class FragmentSettings extends FragmentCore {
         //BACKUP END
 
 
-        mAnimatedSvgView.setGlyphStrings(WorkerPathAnim.WORKER_PATH);
+        mAnimatedSvgView.setGlyphStrings(WorkerPathAnim.WORKER_PATH_NEW);
         mAnimatedSvgView.setFillPaints(
                 new int[]{255, 255},
-                new int[]{254, 40},
-                new int[]{254, 40},
-                new int[]{113, 40});
+                new int[]{255, 51},
+                new int[]{175, 51},
+                new int[]{59,  51});
         int traceColor = Color.argb(255, 0, 0, 0);
         int[] traceColors = new int[2];
         int residueColor = Color.argb(50, 0, 0, 0);

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.SQLException;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -21,7 +20,6 @@ import android.widget.*;
 import com.metalen.worker.MainActivity;
 import com.metalen.worker.R;
 import com.metalen.worker.SQL.SQLHandler;
-import com.metalen.worker.animator.WorkerPathAnim;
 import com.metalen.worker.classes.DataRecord;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -298,7 +296,7 @@ public class HomeFragment extends FragmentCore {
     }
 
     private void StartAnimationWorker() {
-        mSVGCardView.setVisibility(View.VISIBLE);
+       /* mSVGCardView.setVisibility(View.VISIBLE);
         mSVGAnimView.setGlyphStrings(WorkerPathAnim.WORKER_PATH);
         mSVGAnimView.setFillPaints(
                 new int[]{255, 255},
@@ -321,7 +319,7 @@ public class HomeFragment extends FragmentCore {
             public void run() {
                 mSVGAnimView.start();
             }
-        }, 1000);
+        }, 1000);*/
     }
 
 

@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.WindowManager;
+import com.metalen.worker.SQL.SQLHandler;
 import com.metalen.worker.fragments.*;
 import com.percolate.foam.FoamEvent;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
@@ -31,8 +32,11 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
     public boolean mSignInClicked;
     MaterialAccount account, account2;
     MaterialSection sHome, sNorm, sHolidays, sWorkHours, sOvertime, sSalary, sSettings, sCalendar, sIntervencije, sSickLeave;
-
+   // private Firebase mFirebaseRef, mFireBaseUser;
+    SQLHandler mDB;
+    
     private static final int REQUEST_CODE = 5623;
+    private String ACC_USER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 
     @Override
     public void init(Bundle savedInstanceState) {
+
+       // Firebase.setAndroidContext(this);
 
         account = new MaterialAccount(this.getResources(), getString(R.string.text_acc_edit_1), getString(R.string.text_acc_edit_2), R.drawable.ic_launcher, R.drawable.bg2);
         account2 = new MaterialAccount(this.getResources(), "", "", R.drawable.ic_launcher, R.drawable.bg2);
@@ -90,15 +96,11 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
         SharedPreferences prefs = getSharedPreferences("Worker", MODE_PRIVATE);
         if(prefs.getBoolean("Intro", false) == false)
             loadTutorial();
-        //Test code
-       /* View C = findViewById(R.id.C);
-        ViewGroup parent = (ViewGroup) C.getParent();
-        int index = parent.indexOfChild(C);
-        parent.removeView(C);
-        C = getLayoutInflater().inflate(optionId, parent, false);
-        parent.addView(C, index);*/
-
-    }
+        //test
+        //mFirebaseRef = new Firebase("https://workerapp.firebaseio.com/");
+       //
+       //mFirebaseRef.child("App").setValue(mDB.getAll().get(0).getID());
+}
 
     //TUTORIAL
 

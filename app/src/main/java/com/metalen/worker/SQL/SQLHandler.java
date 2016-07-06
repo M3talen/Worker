@@ -33,6 +33,7 @@ public class SQLHandler extends SQLiteOpenHelper {
     private static final String KEY_DATA_3 = "DATA_3";
     private static final String KEY_DATA_4 = "DATA_4";
     private Context mContext;
+    private Object all;
 
     public SQLHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -285,5 +286,33 @@ public class SQLHandler extends SQLiteOpenHelper {
         Log.d("Removing", "ID : " + id);
     }
 
+    public List<DataRecord> getAll() {
+        List<DataRecord> Record = new LinkedList<DataRecord>();
 
+        String query = "SELECT * FROM " + TABLE_RECORDS + "'";
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        DataRecord mList = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                mList = new DataRecord();
+                mList.setID(Integer.parseInt(cursor.getString(0)));
+                mList.setACC(cursor.getString(1));
+                mList.setTYPE(cursor.getString(2));
+                mList.setDATE(cursor.getString(3));
+                mList.setDATA_1(cursor.getString(4));
+                mList.setDATA_2(cursor.getString(5));
+                mList.setDATA_3(cursor.getString(6));
+                mList.setDATA_4(cursor.getString(7));
+                Record.add(mList);
+
+            } while (cursor.moveToNext());
+
+        }
+
+        Log.d("Getting all records", Record.toString());
+        return Record;
+    }
 }
